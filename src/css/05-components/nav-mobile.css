@@ -1,0 +1,136 @@
+/**
+ * 05 · COMPONENTS — MOBILE NAV
+ * ============================================================================
+ * Tam ekran örtü. Sitedeki TEK gölge kullanımı burasıdır — çünkü burada
+ * gerçekten üst üste binen iki katman vardır ve ayrım fiziksel olarak
+ * gereklidir. (PHASE 06 §11)
+ *
+ * KAPALI DURUM: `visibility: hidden`.
+ * `opacity: 0` tek başına yetmez — görünmez ama odaklanabilir bağlantılar
+ * bırakır ve klavye kullanıcısı hiçbir yerde olmayan bir menüde kaybolur.
+ * `display: none` ise geçişi imkânsız kılar. `visibility` ikisini de çözer:
+ * sekme sırasından çıkarır ve animasyona izin verir.
+ *
+ * DİKKAT — visibility DISCRETE bir özelliktir.
+ * `transition: visibility 320ms` yazılırsa değer geçişin ORTASINDA (%50)
+ * değişir: panel açıldıktan sonraki ilk 160ms boyunca hâlâ `hidden` kalır ve
+ * o aralıkta yapılan `focus()` çağrısı SESSİZCE başarısız olur — odak
+ * tetikleyicide kalır, menü açılır ama klavye kullanıcısı içine giremez.
+ * Bu hata Playwright tarafından yakalandı.
+ *
+ * Çözüm: visibility süresi 0s tutulur, yalnızca KAPANIŞTA geciktirilir.
+ *   açılış  → anında görünür, odak hemen taşınabilir
+ *   kapanış → opaklık sönene kadar görünür kalır, sonra sekme sırasından çıkar
+ */
+
+.c-nav-mobile {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface-page);
+  box-shadow: var(--shadow-overlay);
+
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    visibility 0s linear var(--duration-slow);
+}
+
+.c-nav-mobile.is-open {
+  visibility: visible;
+  opacity: 1;
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    visibility 0s linear 0s;
+}
+
+/* Üst şerit — header ile aynı yükseklikte ve aynı hizada, böylece menü
+   açılırken marka yerinden oynamaz. */
+.c-nav-mobile__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-block-size: var(--header-height);
+  padding-inline: var(--container-pad);
+}
+
+.c-nav-mobile__brand {
+  font-family: var(--font-display);
+  font-size: var(--type-heading-s);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+.c-nav-mobile__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--target-min);
+  block-size: var(--target-min);
+  color: var(--text-primary);
+  border-radius: var(--radius-xs);
+}
+
+/* Gövde — bağlantılar. Dikey ortalama YOK: içerik üstten akar, editöryel
+   eksen korunur. */
+.c-nav-mobile__body {
+  flex: 1 1 auto;
+  padding-inline: var(--container-pad);
+  padding-block-start: var(--space-8);
+  overflow-y: auto;
+}
+
+.c-nav-mobile__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.c-nav-mobile__list li {
+  margin-block-end: var(--space-6);
+}
+
+.c-nav-mobile__link {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--target-min);
+  font-family: var(--font-display);
+  font-size: var(--type-heading-m);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.c-nav-mobile__link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* Alt bölge — birincil eylem. Menüdeki tek dolu buton. */
+.c-nav-mobile__footer {
+  padding-inline: var(--container-pad);
+  padding-block: var(--space-8);
+}
+
+/* Masaüstüne geçildiğinde panel her koşulda kapanır ve erişilemez olur.
+   JS de aynı işi yapar; bu satır JS başarısız olsa bile paneli mahsur
+   bırakmamak içindir. */
+@media (min-width: 48rem) { /* 768px */
+  .c-nav-mobile,
+  .c-nav-mobile.is-open {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* JS yoksa panel hiç var olmaz — navigasyon header içinde akışta durur. */
+@media (scripting: none) {
+  .c-nav-mobile {
+    display: none;
+  }
+}

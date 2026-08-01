@@ -1,0 +1,111 @@
+/**
+ * 05 · COMPONENTS — PROCESS
+ * ============================================================================
+ * Asılı numaralı liste. Numaralar sol marja asılır — editöryel "hanging
+ * indent" tekniği.
+ *
+ * Neden asılı: kitle bölümü de ayraçlı satır listesi kullanıyor. Asılı numara,
+ * iki bölümün aynı görünmesini engelleyen ayırt edici cihazdır.
+ *
+ * Numaralar CSS ile YAZILMAZ, sıralı listenin kendisinden gelir. Ekran
+ * okuyucu "4 öğeden 1'i" bilgisini böylece verir; görsel numara ile anlamsal
+ * sıra ayrışmaz. (PHASE 08 §3)
+ *
+ * SÜRE BİLGİSİ ZORUNLUDUR. Fiyat gösterilmediği için eleme yükü süreye
+ * kaydı: "3 günde site" arayan ziyaretçi haftalarla ifade edilen bir süreci
+ * görünce kendi kendine elenir — sitenin yapabileceği en nazik eleme.
+ */
+
+.c-process {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: step;
+}
+
+.c-process__step {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-2);
+}
+
+/* Numara görsel katmandır; anlamsal sıra <ol> tarafından taşınır.
+   Bu yüzden aria-hidden ile ekran okuyucudan gizlenir (HTML tarafında). */
+.c-process__num {
+  font-family: var(--font-display);
+  font-size: var(--type-heading-m);
+  font-weight: var(--weight-regular);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-accent);
+  line-height: var(--line-tight);
+}
+
+.c-process__name {
+  font-family: var(--font-display);
+  font-size: var(--type-heading-s);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+}
+
+.c-process__desc {
+  font-size: var(--type-body-m);
+  line-height: var(--line-body-m);
+  color: var(--text-secondary);
+}
+
+.c-process__time {
+  font-size: var(--type-caption);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+@media (min-width: 64rem) { /* 1024px */
+  .c-process__step {
+    grid-template-columns: 2fr 10fr;
+    gap: var(--space-8);
+  }
+
+  .c-process__body {
+    display: grid;
+    gap: var(--space-2);
+  }
+}
+
+/* ------------------------------------------------------------- taahhütler
+   Kaldırılan müşteri yorumları bölümünün yerini tutar: üçüncü kişi övgüsü
+   yerine DOĞRULANABİLİR TAAHHÜT. Yorum envanteri oluşana kadar güvenin
+   taşıyıcısı budur. (PHASE 07 · Bölüm 04) */
+.c-commitments {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.c-commitments__item {
+  border-block-start: var(--border-hairline) solid var(--border-subtle);
+  padding-block-start: var(--space-4);
+}
+
+.c-commitments__title {
+  font-size: var(--type-body-s);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  padding-block-end: var(--space-1);
+}
+
+.c-commitments__note {
+  font-size: var(--type-body-s);
+  line-height: var(--line-body-s);
+  color: var(--text-muted);
+}
+
+@media (min-width: 64rem) { /* 1024px */
+  .c-commitments {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-8);
+  }
+}

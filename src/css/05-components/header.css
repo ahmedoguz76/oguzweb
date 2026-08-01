@@ -1,0 +1,199 @@
+/**
+ * 05 · COMPONENTS — HEADER
+ * Premium navbar update
+ */
+
+.c-header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: var(--z-header);
+
+  /* Glassmorphism KALDIRILDI. `backdrop-filter: blur()` yasak listesinin ilk
+     maddesidir ve kâğıt metaforuyla çelişir — basılı bir sayfada bulanıklaşan
+     katman olmaz. Ayrıca her kaydırma karesinde GPU maliyeti üretiyordu.
+     Header artık zeminle aynı renkte; içerikten ayrımı hairline kurar. */
+  background-color: var(--surface-page);
+
+  border-block-end: var(--border-hairline) solid transparent;
+
+  transition:
+    transform var(--duration-base) var(--ease-in-out),
+    border-color var(--duration-base) var(--ease-in-out);
+}
+
+.c-header.is-pinned {
+  /* Kaydırınca içerikten ayıran tek sinyal hairline'dır. Gölge yok:
+     yükseklik metaforu Material dilidir, kâğıt metaforuna ait değildir. */
+  border-block-end-color: var(--border-subtle);
+}
+
+.c-header.is-hidden {
+  transform: translateY(-100%);
+}
+
+
+.c-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+
+  min-block-size: var(--header-height);
+}
+
+
+.c-header__brand {
+  font-family: var(--font-display);
+  font-size: var(--type-heading-s);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--track-heading-m);
+
+  color: var(--text-primary);
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+
+.c-header__brand:hover {
+  color: var(--text-secondary);
+  transform: translateY(-1px);
+}
+
+
+
+.c-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+
+
+/* CTA hover'ı buton bileşeninin kendi renk geçişine bırakıldı.
+   Yükselme + gölge, "tek birincil eylem"i abartılı bir nesneye çeviriyordu
+   ve gölge yasağını ihlal ediyordu. */
+
+
+
+.c-nav {
+  display: none;
+}
+
+
+@media (min-width:48rem) {
+
+  .c-nav {
+    display:block;
+  }
+
+
+  .c-nav__list {
+
+    display:flex;
+    align-items:center;
+
+    gap:var(--space-8);
+
+    list-style:none;
+
+    padding:0;
+    margin:0;
+  }
+
+
+  .c-nav__list li {
+    margin-block-end:0;
+  }
+
+}
+
+
+
+.c-header__toggle {
+
+  display:inline-flex;
+
+  align-items:center;
+  justify-content:center;
+
+  inline-size:var(--target-min);
+  block-size:var(--target-min);
+
+  color:var(--text-primary);
+
+  border-radius:var(--radius-xs);
+}
+
+
+
+@media (min-width:48rem){
+
+  .c-header__toggle{
+    display:none;
+  }
+
+}
+
+/* ============================================================================
+   K2 · SÖZDİZİMİ HATASI DÜZELTİLDİ
+
+   Aşağıdaki bloğun `@media (scripting: none) {` açılış satırı kaybolmuştu;
+   içeriği ve kapanış parantezi kalmıştı. Dosyanın parantez dengesi -1 idi.
+
+   İki sonucu vardı:
+     1. `.c-header__inner { flex-wrap: wrap }` HER genişlikte geçerliydi —
+        header beklenmedik biçimde satır kırabiliyordu.
+     2. Fazla `}` derlenmiş çıktıda `@layer components` bloğunu erken
+        kapatıyordu.
+     3. JS kapalıyken menü tetikleyicisi görünür kalıyor ama hiçbir şey
+        yapmıyordu. Çalışmayan bir buton, olmayan butondan kötüdür.
+
+   JAVASCRIPT YOKSA
+   `@media (scripting: none)` — JS'in kapalı olduğunu tarayıcı kendisi
+   bildirir; sınıf enjekte eden satır içi script'e gerek kalmaz ve katı bir
+   CSP mümkün kalır. Varsayılan JS'li davranıştır; bu blok yalnızca üzerine
+   yazar. Sonuç: tetikleyici kaybolur, navigasyon akışta görünür durur.
+   ============================================================================ */
+@media (scripting: none) {
+
+  .c-header {
+    position: static;
+  }
+
+  .c-header__toggle {
+    display: none;
+  }
+
+  .c-header__inner {
+    flex-wrap: wrap;
+  }
+
+  /* Tetikleyici gizlendiği için navigasyonun AKIŞTA görünmesi gerekir.
+     Bu satır olmadan `.c-nav { display: none }` (768px altı) yürürlükte
+     kalıyordu ve JS kapalı mobil ziyaretçide header'da hiçbir bağlantı
+     kalmıyordu — yalnızca alt bilgi. Ölçülerek yakalandı. */
+  .c-nav {
+    display: block;
+    flex-basis: 100%;
+    padding-block-end: var(--space-4);
+  }
+
+  .c-nav__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) var(--space-6);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .c-nav__list li {
+    margin-block-end: 0;
+  }
+}

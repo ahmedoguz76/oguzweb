@@ -1,0 +1,247 @@
+<!-- meta {
+  "title": "ODS v1.0 · primitive galerisi (geliştirme)",
+  "description": "Geliştirme aracı.",
+  "canonical": "https://oguzweb.com.tr/_dev-primitives",
+  "robots": "noindex, nofollow"
+} -->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <!-- include: head.html -->
+  <style>
+    /* Yalnızca bu geliştirme sayfasına ait. Yayına çıkmaz. */
+    .g { padding-block: 3rem 8rem; }
+    .g-block { margin-block-end: 4rem; }
+    .g-h { font-family: var(--font-text); font-size: var(--type-label);
+      letter-spacing: var(--track-label); font-weight: var(--weight-semibold);
+      color: var(--text-accent); margin-block-end: 1rem; }
+    .g-note { font-size: var(--type-body-s); color: var(--text-muted);
+      max-inline-size: var(--measure-reading); margin-block-end: 1.5rem; }
+    .g-set { display: flex; flex-wrap: wrap; align-items: center;
+      gap: 1rem 1.5rem; }
+    .g-cell { display: grid; gap: 0.5rem; justify-items: start; }
+    .g-key { font-family: var(--font-text); font-size: var(--type-caption);
+      color: var(--text-muted); }
+    .g-icons { display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr)); gap: 1.5rem; }
+    .g-icon-cell { display: grid; gap: 0.5rem; justify-items: center;
+      text-align: center; }
+    .g-media { display: grid; gap: 1.5rem;
+      grid-template-columns: minmax(0, 1fr); }
+    @media (min-width: 48rem) {
+      .g-media { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    .g-ph { display: grid; place-items: center; block-size: 100%;
+      background: var(--surface-alt); color: var(--text-muted);
+      font-family: var(--font-text); font-size: var(--type-caption); }
+  </style>
+</head>
+<body>
+
+  <!-- include: icon-sprite.html -->
+
+  <a class="c-link--skip" href="#icerik">İçeriğe geç</a>
+
+  <main id="icerik" class="g">
+    <div class="l-container">
+
+      <p class="g-note">
+        <strong>Primitive galerisi.</strong> Aşama 3 çıktısı. Bu sayfa yayına
+        çıkmaz. Odak halkasını görmek için <kbd>Tab</kbd> tuşuyla gezin —
+        ilk odak atlama bağlantısına gider.
+      </p>
+
+      <!-- ============================================ BUTTON -->
+      <section class="g-block">
+        <p class="g-h">Button · hiyerarşi</p>
+        <p class="g-note">
+          Görünür alanda en fazla bir birincil buton bulunur. Dolu buton ile
+          altı çizili metin arasındaki fark hiyerarşiyi tartışmasız kılar.
+        </p>
+        <div class="g-set">
+          <div class="g-cell">
+            <button type="button" class="c-button c-button--primary c-button--md"
+                    data-btn="primary">
+              WhatsApp'tan yazın
+            </button>
+            <span class="g-key">primary · md</span>
+          </div>
+          <div class="g-cell">
+            <button type="button" class="c-button c-button--secondary c-button--md"
+                    data-btn="secondary">
+              Formu doldurun
+            </button>
+            <span class="g-key">secondary · md</span>
+          </div>
+          <div class="g-cell">
+            <a href="#icerik" class="c-button c-button--tertiary" data-btn="tertiary">
+              Tüm çalışmaları görün
+              <svg class="c-icon c-icon--sm c-icon--motion" aria-hidden="true"
+                   focusable="false"><use href="#i-arrow-right"></use></svg>
+            </a>
+            <span class="g-key">tertiary · yumuşak köprü</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="g-block">
+        <p class="g-h">Button · boyutlar</p>
+        <p class="g-note">
+          Her boyut minimum 44px dokunma hedefinin üstündedir. WCAG 2.2 AA
+          tabanı 24px; 44px seçildi.
+        </p>
+        <div class="g-set">
+          <div class="g-cell">
+            <button type="button" class="c-button c-button--primary c-button--sm"
+                    data-size="sm">Küçük</button>
+            <span class="g-key">sm · 44px</span>
+          </div>
+          <div class="g-cell">
+            <button type="button" class="c-button c-button--primary c-button--md"
+                    data-size="md">Orta</button>
+            <span class="g-key">md · 48px</span>
+          </div>
+          <div class="g-cell">
+            <button type="button" class="c-button c-button--primary c-button--lg"
+                    data-size="lg">Büyük</button>
+            <span class="g-key">lg · 56px</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="g-block">
+        <p class="g-h">Button · durumlar</p>
+        <div class="g-set">
+          <div class="g-cell">
+            <button type="button" class="c-button c-button--primary c-button--md"
+                    disabled data-state="disabled">Devre dışı</button>
+            <span class="g-key">disabled</span>
+          </div>
+          <div class="g-cell">
+            <button type="button" class="c-button c-button--primary c-button--md"
+                    aria-busy="true" data-state="busy">
+              Gönderiliyor
+              <span class="u-visually-hidden">Lütfen bekleyin</span>
+            </button>
+            <span class="g-key">aria-busy</span>
+          </div>
+          <div class="g-cell">
+            <button type="button" class="c-button c-button--primary c-button--md c-button--block"
+                    data-state="block">Tam genişlik</button>
+            <span class="g-key">block · mobil kapanış</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================ LINK -->
+      <section class="g-block">
+        <p class="g-h">Link · varyantlar</p>
+        <p class="g-note">
+          Metin içi bağlantı her zaman altı çizilidir; renk tek başına bağlantı
+          sinyali değildir. Alt çizgi offset'i 3px — varsayılan offset serif
+          harflerin alt çıkıntılarını (g, y, p, ş, ç) keser.
+        </p>
+        <p class="u-measure">
+          Bu paragrafın içinde <a href="#icerik" data-link="inline">metin içi bir
+          bağlantı</a> var. Ayrıca
+          <a href="https://example.com" class="c-link--external"
+             target="_blank" rel="noopener" data-link="external">dış bağlantı
+            <svg class="c-icon c-icon--sm" aria-hidden="true" focusable="false"
+            ><use href="#i-external"></use></svg
+            ><span class="u-visually-hidden">(yeni sekmede açılır)</span></a>
+          ve ayrıca çıkıntılı harfler: yağış, çöp, ağaç, şeker.
+        </p>
+        <div class="g-set" style="margin-block-start:1.5rem">
+          <a href="#icerik" class="c-link--nav" data-link="nav">Gezinme bağlantısı</a>
+          <a href="#icerik" class="c-link--bridge" data-link="bridge">
+            Yumuşak köprü
+            <svg class="c-icon c-icon--sm c-icon--motion" aria-hidden="true"
+                 focusable="false"><use href="#i-arrow-right"></use></svg>
+          </a>
+          <a href="#icerik" class="c-link--quiet" data-link="quiet">Sessiz bağlantı</a>
+        </div>
+      </section>
+
+      <!-- ============================================ ICON -->
+      <section class="g-block">
+        <p class="g-h">Icon · 10 ikonluk envanter</p>
+        <p class="g-note">
+          Kütüphane kullanılmaz — hazır setler tanınır ve template sinyali
+          verir. 24×24 ızgara, 1.5 çizgi kalınlığı, currentColor.
+          İçerik bölümlerinde dekoratif ikon yoktur.
+        </p>
+        <div class="g-icons">
+          <div class="g-icon-cell"><svg class="c-icon" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg><span class="g-key">menu</span></div>
+          <div class="g-icon-cell"><svg class="c-icon" aria-hidden="true" focusable="false"><use href="#i-close"></use></svg><span class="g-key">close</span></div>
+          <div class="g-icon-cell"><svg class="c-icon" aria-hidden="true" focusable="false"><use href="#i-arrow-down"></use></svg><span class="g-key">arrow-down</span></div>
+          <div class="g-icon-cell"><svg class="c-icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg><span class="g-key">arrow-right</span></div>
+          <div class="g-icon-cell"><svg class="c-icon" aria-hidden="true" focusable="false"><use href="#i-external"></use></svg><span class="g-key">external</span></div>
+          <div class="g-icon-cell"><svg class="c-icon" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span class="g-key">check</span></div>
+          <div class="g-icon-cell"><svg class="c-icon" aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg><span class="g-key">whatsapp</span></div>
+          <div class="g-icon-cell"><svg class="c-icon" aria-hidden="true" focusable="false"><use href="#i-instagram"></use></svg><span class="g-key">instagram</span></div>
+          <div class="g-icon-cell"><svg class="c-icon" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg><span class="g-key">phone</span></div>
+          <div class="g-icon-cell"><svg class="c-icon" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg><span class="g-key">mail</span></div>
+        </div>
+      </section>
+
+      <!-- ============================================ IMAGE -->
+      <section class="g-block">
+        <p class="g-h">Image · sabit oran seti</p>
+        <p class="g-note">
+          Çerçeve yok, kenarlık yok, gölge yok, yuvarlatma yok. Oran kapta
+          tutulur: görsel yüklenmemişken bile yer ayrılmıştır, düzen kaymaz.
+          Görsel dosyaları henüz yok — kaplar gerçek oranlarında duruyor.
+        </p>
+        <div class="g-media">
+          <figure class="c-image c-image--16-10" data-img="16-10">
+            <div class="c-image__media"><div class="g-ph">16 : 10</div></div>
+            <figcaption class="c-image__caption">Masaüstü proje görüntüsü</figcaption>
+          </figure>
+          <figure class="c-image c-image--4-5" data-img="4-5">
+            <div class="c-image__media"><div class="g-ph">4 : 5</div></div>
+            <figcaption class="c-image__caption">Portre · mobil görüntü</figcaption>
+          </figure>
+          <figure class="c-image c-image--3-2" data-img="3-2">
+            <div class="c-image__media"><div class="g-ph">3 : 2</div></div>
+            <figcaption class="c-image__caption">Genel</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="g-block">
+        <p class="g-h">Image · tıklanabilir</p>
+        <p class="g-note">
+          Çerçeve olmadığı için tıklanabilirlik opaklıkla bildirilir.
+          Yükselme, gölge, ölçek yok.
+        </p>
+        <div class="g-media">
+          <a href="#icerik" class="c-image c-image--16-10 c-image--interactive"
+             data-img="interactive" style="text-decoration:none">
+            <span class="c-image__media"><span class="g-ph">üzerine gelin</span></span>
+            <span class="c-image__caption">Örnek Klinik — Diş kliniği</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============================================ FOCUS -->
+      <section class="g-block">
+        <p class="g-h">Odak sistemi</p>
+        <p class="g-note">
+          2px vurgu renginde halka, 2px offset. Hiçbir yerde kaldırılmaz.
+          Offset kritiktir: halka koyu butonun üstüne değil, kâğıt zemine
+          düşer — kontrast 10:1 olur. Halka butonun içine çizilseydi
+          #1B3A31 / #16130F kontrastı 3:1'in altında kalırdı.
+        </p>
+        <div class="g-set">
+          <button type="button" class="c-button c-button--primary c-button--md"
+                  data-focus="primary">Odaklan</button>
+          <button type="button" class="c-button c-button--secondary c-button--md"
+                  data-focus="secondary">Odaklan</button>
+          <a href="#icerik" data-focus="link">Bağlantıya odaklan</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</body>
+</html>

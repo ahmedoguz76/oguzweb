@@ -1,0 +1,70 @@
+/**
+ * 05 · COMPONENTS — SCOPE
+ * ============================================================================
+ * "Her projede ne var / ne yok".
+ *
+ * Bu, ayrı bir HİZMETLER bölümü DEĞİLDİR. PHASE 03'te ayrı hizmet listesi
+ * reddedildi: kapsam dağıtır, ajans klişesidir ve uzmanlık sinyalini zayıflatır.
+ * Kapsam, sürecin içinde tanımlanır.
+ *
+ * Fiyat gösterilmediği için "ne alıyorum" sorusunun cevabı çok net olmalıdır:
+ * belirsizlik + fiyatsızlık = güvensizlik. Bu blok o telafinin merkezidir.
+ *
+ * "Neler dahil değil" satırı bilinçlidir: uzmanlık sinyali, kapsam
+ * genişliğinden daha pahalı satar. Aynı zamanda yanlış müşteriyi nazikçe eler.
+ *
+ * İKON YOK. Her maddenin başına ikon koymak web'in en tanınabilir template
+ * işaretidir. Ayrım hairline ve boşlukla kurulur.
+ */
+
+.c-scope {
+  padding-block-start: var(--space-6);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.c-scope__item {
+  border-block-start: var(--border-hairline) solid var(--border-subtle);
+  padding-block: var(--space-4);
+}
+
+.c-scope__item:last-child {
+  border-block-end: var(--border-hairline) solid var(--border-subtle);
+}
+
+.c-scope__name {
+  font-size: var(--type-body-m);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+}
+
+.c-scope__note {
+  font-size: var(--type-body-s);
+  line-height: var(--line-body-s);
+  color: var(--text-muted);
+}
+
+.c-scope__excluded {
+  padding-block-start: var(--space-6);
+  font-size: var(--type-body-s);
+  line-height: var(--line-body-s);
+  color: var(--text-muted);
+  max-inline-size: var(--measure-reading);
+}
+
+@media (min-width: 64rem) { /* 1024px */
+  .c-scope {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-16);
+  }
+
+  /* İki sütunda son iki öğenin alt kenarlığı — tek sütundaki :last-child
+     kuralı yetmez. */
+  .c-scope__item:nth-last-child(-n + 2) {
+    border-block-end: var(--border-hairline) solid var(--border-subtle);
+  }
+}

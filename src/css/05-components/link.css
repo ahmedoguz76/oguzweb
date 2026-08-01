@@ -1,0 +1,205 @@
+/**
+ * 05 · COMPONENTS — LINK
+ * Premium navigation link update
+ */
+
+
+.c-link--nav {
+
+  position: relative;
+
+  display: inline-flex;
+
+  align-items:center;
+
+  min-block-size:var(--target-min);
+
+
+  font-family:var(--font-text);
+
+  font-size:var(--type-body-s);
+
+  font-weight:var(--weight-medium);
+
+
+  color:var(--text-secondary);
+
+  text-decoration:none;
+
+
+  transition:
+
+    color var(--duration-fast) var(--ease-out);
+
+}
+
+
+/* Premium hover çizgisi */
+
+.c-link--nav::after {
+
+  content:"";
+
+  position:absolute;
+
+
+  inset-inline:0;
+
+  /* Skalaya oturtuldu: 6px → 8px (space-2). */
+  inset-block-end: var(--space-2);
+
+
+  height:1px;
+
+
+  background:var(--text-primary);
+
+
+  transform:scaleX(0);
+
+  transform-origin:center;
+
+
+  transition:
+
+    transform var(--duration-fast) var(--ease-out);
+
+}
+
+
+
+.c-link--nav:hover {
+
+  color:var(--text-primary);
+
+}
+
+
+
+.c-link--nav:hover::after {
+
+  transform:scaleX(1);
+
+}
+
+
+
+
+.c-link--bridge {
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:var(--space-2);
+
+
+  min-block-size:var(--target-min);
+
+
+  font-family:var(--font-text);
+
+  font-size:var(--type-body-m);
+
+  font-weight:var(--weight-medium);
+
+
+  color:var(--text-primary);
+
+  text-underline-offset:3px;
+
+}
+
+
+
+.c-link--bridge:hover .c-icon--motion {
+
+  transform:translateX(3px);
+
+}
+
+
+
+
+.c-link--external {
+
+  display:inline-flex;
+
+  align-items:baseline;
+
+  gap:var(--space-1);
+
+}
+
+
+
+.c-link--external .c-icon {
+
+  align-self:center;
+
+}
+
+
+
+
+.c-link--quiet {
+
+  color:var(--text-muted);
+
+  text-decoration-thickness:1px;
+
+}
+
+
+
+.c-link--quiet:hover {
+
+  color:var(--text-primary);
+
+}
+
+
+
+
+
+.c-link--skip {
+
+  position:absolute;
+
+  inset-block-start:var(--space-2);
+
+  inset-inline-start:var(--space-2);
+
+
+  z-index:var(--z-skiplink);
+
+
+  padding:
+
+    var(--space-3)
+
+    var(--space-4);
+
+
+  background-color:var(--action-primary-bg);
+
+  color:var(--action-primary-text);
+
+
+  text-decoration:none;
+
+
+  border-radius:var(--radius-xs);
+
+
+  transform:translateY(-200%);
+
+}
+
+
+
+.c-link--skip:focus-visible {
+
+  transform:translateY(0);
+
+}

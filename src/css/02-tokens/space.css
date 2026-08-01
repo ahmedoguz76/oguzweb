@@ -1,0 +1,91 @@
+/**
+ * 02 · TOKENS — SPACE
+ * ============================================================================
+ * Taban birim 4px. Skala doğrusal değil, ALGISAL olarak artar: küçük
+ * adımlarda ince, büyük adımlarda seyrek. Göz 64px ile 68px arasındaki farkı
+ * algılamaz; algılanamayan adım sisteme yük olur. (PHASE 06 §6)
+ *
+ * 4px seçimi: 1x / 1.5x / 2x / 3x piksel yoğunluklarının tamamında tam sayıya
+ * oturur — yarım piksel bulanıklığı oluşmaz. 8px taban editöryel ince ayar
+ * için fazla kaba kalır.
+ *
+ * YASAK: skala dışı değer, negatif margin ile düzeltme.
+ */
+
+:root {
+  /* ------------------------------------------------------------- skala */
+  --space-1: 0.25rem;   /*   4px */
+  --space-2: 0.5rem;    /*   8px */
+  --space-3: 0.75rem;   /*  12px */
+  --space-4: 1rem;      /*  16px */
+  --space-5: 1.25rem;   /*  20px */
+  --space-6: 1.5rem;    /*  24px */
+  --space-8: 2rem;      /*  32px */
+  --space-10: 2.5rem;   /*  40px */
+  --space-12: 3rem;     /*  48px */
+  --space-16: 4rem;     /*  64px */
+  --space-20: 5rem;     /*  80px */
+  --space-24: 6rem;     /*  96px */
+  --space-32: 8rem;     /* 128px */
+  --space-40: 10rem;    /* 160px */
+  --space-48: 12rem;    /* 192px */
+
+  /* -------------------------------------------------------- semantik */
+  --space-inline: var(--space-2);  /* yan yana ilişkili öğeler */
+  --space-item: var(--space-4);    /* liste öğeleri arası */
+  --space-block: var(--space-8);   /* blok arası */
+  --space-group: var(--space-16);  /* ilişkili blok grupları arası */
+
+  /* ------------------------------------------- bölüm boşluğu (taban) */
+  --space-section: var(--space-20);       /*  80px */
+  --space-section-inner-max: var(--space-8); /* 32px — oran denetimi için */
+
+  /* Kapanış bölümünün ayrıcalığı: sayfadaki en büyük tek boşluk.
+     Ayrıcalık ortalama ile değil boşlukla verilir. (PHASE 07 §08) */
+  --space-section-closing: var(--space-24);
+}
+
+/**
+ * ORAN KURALI — bu sistemin en önemli tek kuralı
+ * ----------------------------------------------------------------------------
+ *   --space-section >= 2.5 × --space-section-inner-max
+ *
+ * Yön A'da bölümler ayraç çizgisiyle DEĞİL, yalnızca boşlukla ayrılır.
+ * Bu ayrımın çalışması matematiksel bir orana bağlıdır. Oran 2.5'in altına
+ * düşerse bölümler birbirine karışır ve sayfa "uzun bir metin" gibi okunur.
+ *
+ * Denetim:
+ *    <768px    80 / 32  = 2.50  ✓
+ *   768–1023   96 / 32  = 3.00  ✓
+ *  1024–1279  128 / 48  = 2.67  ✓
+ *    >=1280   160 / 64  = 2.50  ✓
+ *
+ * 768–1023 aralığı bir dönem 96/40 = 2.40 idi ve yorumda hatalı olarak ✓
+ * işaretlenmişti. Kural 2.5'tir; 2.40 onu sağlamaz. inner-max space-8'e
+ * çekildi. Eşiği kurala uydurmak yerine kuralı eşiğe uydurmak, kuralı
+ * ortadan kaldırmaktır — bu satır o hatanın kaydıdır.
+ */
+
+@media (min-width: 48rem) { /* 768px */
+  :root {
+    --space-section: var(--space-24);          /*  96px */
+    --space-section-inner-max: var(--space-8); /*  32px → oran 3.00 */
+    --space-section-closing: var(--space-32);
+  }
+}
+
+@media (min-width: 64rem) { /* 1024px */
+  :root {
+    --space-section: var(--space-32);           /* 128px */
+    --space-section-inner-max: var(--space-12); /*  48px */
+    --space-section-closing: var(--space-40);
+  }
+}
+
+@media (min-width: 80rem) { /* 1280px */
+  :root {
+    --space-section: var(--space-40);           /* 160px */
+    --space-section-inner-max: var(--space-16); /*  64px */
+    --space-section-closing: var(--space-48);   /* 192px */
+  }
+}

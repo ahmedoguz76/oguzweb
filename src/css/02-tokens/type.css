@@ -1,0 +1,81 @@
+/**
+ * 02 · TOKENS — TYPE
+ * ============================================================================
+ * Yön A'da tipografi dekorasyon değil ALTYAPIDIR. Sayfanın taşıyıcı sistemi.
+ *
+ * Modüler oran: 1.25 (mobil, 360px) → 1.333 (masaüstü, 1440px)
+ * Geçiş akışkan. Tek oran kullanmak iki uçtan birinde başarısız olur:
+ * 1.25 masaüstünde yavan kalır, 1.333 mobilde başlıkları taşırır.
+ *
+ * clamp() türetimi:  eğim = (max − min) / (1440 − 360)
+ *                    vw katsayısı = eğim × 100
+ *                    sabit = min − eğim × 360
+ */
+
+:root {
+  /* ------------------------------------------------------------ aileler */
+  /* Aileler 03-base/fonts.css içinde tanımlanır. */
+
+  /* ---------------------------------------------------------- ağırlıklar */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* -------------------------------------------------- akışkan tip skalası
+     min(360px) → max(1440px)                                              */
+
+  /* 40 → 76px · açılış beyanı, sayfada 1 kez */
+  --type-display-xl: clamp(2.5rem, 1.92rem + 2.58vw, 4.125rem);
+
+  /* 32 → 56px · bölüm başlığı (h2) */
+  --type-display-l: clamp(2rem, 1.5rem + 2.2222vw, 3.5rem);
+
+  /* 24 → 32px · alt başlık (h3) */
+  --type-heading-m: clamp(1.5rem, 1.3333rem + 0.7407vw, 2rem);
+
+  /* 20 → 24px · küçük başlık (h4), işletme adı */
+  --type-heading-s: clamp(1.25rem, 1.1667rem + 0.3704vw, 1.5rem);
+
+  /* 18 → 20px · giriş paragrafı */
+  --type-body-l: clamp(1.125rem, 1.0833rem + 0.1852vw, 1.25rem);
+
+  /* 16 → 17px · ana metin. 16px altına İNMEZ:
+     iOS'ta 16px altı form alanı otomatik yakınlaştırma tetikler. */
+  --type-body-m: clamp(1rem, 0.9792rem + 0.0926vw, 1.0625rem);
+
+  /* 14 → 15px · yardımcı metin */
+  --type-body-s: clamp(0.875rem, 0.8542rem + 0.0926vw, 0.9375rem);
+
+  /* 13px sabit · künye, etiket */
+  --type-caption: 0.8125rem;
+  --type-label: 0.8125rem;
+
+  /* ----------------------------------------------------- satır yüksekliği
+     Boyutla TERS orantılı. Sabit satır yüksekliği en yaygın amatör hatadır:
+     büyük başlık sıkışık olmalı, küçük metin nefes almalı. */
+  --line-display-xl: 1.04;
+  --line-display-l: 1.1;
+  --line-heading-m: 1.2;
+  --line-heading-s: 1.3;
+  --line-body-l: 1.6;
+  --line-body-m: 1.65;
+  --line-body-s: 1.6;
+  --line-caption: 1.5;
+  --line-label: 1.4;
+  --line-tight: 1;
+
+  /* --------------------------------------------------------- harf aralığı
+     Büyük boyutta negatif: serif başlıklar büyütüldüğünde optik olarak
+     gevşer. Küçük boyutta uygulanmaz — okunabilirliği düşürür. */
+  --track-display-xl: -0.02em;
+  --track-display-l: -0.015em;
+  --track-heading-m: -0.01em;
+  --track-normal: 0;
+  --track-label: 0.06em;
+
+  /* ------------------------------------------------------ ölçü (measure)
+     Türkçe ortalama kelime uzunluğu İngilizce'den fazla; 60–72 karakter
+     bandı hedeflenir. (PHASE 06 §7) */
+  --measure-reading: 68ch;
+  --measure-lead: 52ch;
+}

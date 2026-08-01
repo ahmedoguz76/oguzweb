@@ -1,0 +1,237 @@
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+
+<header class="c-header" data-header>
+  <div class="l-container">
+    <div class="c-header__inner">
+
+      <a
+        class="c-header__brand"
+        href="{{basePath}}index.html"
+        aria-label="OğuzWeb ana sayfa"
+      >
+        OğuzWeb
+      </a>
+
+
+      <nav class="c-nav" aria-label="Ana menü">
+        <ul class="c-nav__list">
+
+          <li>
+            <a
+              class="c-link--nav"
+              href="{{basePath}}isler/index.html"
+            >
+              İşler
+            </a>
+          </li>
+
+          <li>
+            <a
+              class="c-link--nav"
+              href="{{basePath}}calisma-sekli/index.html"
+            >
+              Çalışma Şekli
+            </a>
+          </li>
+
+          <li>
+            <a
+              class="c-link--nav"
+              href="{{basePath}}studio/index.html"
+            >
+              Stüdyo
+            </a>
+          </li>
+
+          <li>
+            <a
+              class="c-link--nav"
+              href="{{basePath}}iletisim/index.html"
+            >
+              İletişim
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+
+
+      <div class="c-header__actions">
+
+        <a
+          class="
+            c-button
+            c-button--primary
+            c-button--sm
+            c-header__cta
+          "
+          href="https://wa.me/905050432716?text={{waHero}}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          <svg
+            class="c-icon c-icon--sm"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <use href="#i-whatsapp"></use>
+          </svg>
+
+          WhatsApp'tan yazın
+
+        </a>
+
+
+        <button
+          type="button"
+          class="c-header__toggle"
+          data-nav-toggle
+          aria-expanded="false"
+          aria-controls="site-menu"
+        >
+
+          <svg
+            class="c-icon"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <use href="#i-menu"></use>
+          </svg>
+
+          <span class="u-visually-hidden">
+            Menüyü aç
+          </span>
+
+        </button>
+
+
+      </div>
+
+
+    </div>
+  </div>
+</header>
+
+
+<!-- MOBİL MENÜ -->
+
+<div
+  class="c-nav-mobile"
+  id="site-menu"
+  data-nav-panel
+>
+
+  <div class="c-nav-mobile__bar">
+
+    <span class="c-nav-mobile__brand">
+      OğuzWeb
+    </span>
+
+
+    <button
+      type="button"
+      class="c-nav-mobile__close"
+      data-nav-close
+    >
+
+      <svg
+        class="c-icon"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <use href="#i-close"></use>
+      </svg>
+
+      <span class="u-visually-hidden">
+        Menüyü kapat
+      </span>
+
+    </button>
+
+  </div>
+
+
+  <nav
+    class="c-nav-mobile__body"
+    aria-label="Mobil menü"
+  >
+
+    <ul class="c-nav-mobile__list">
+
+      <li>
+        <a
+          class="c-nav-mobile__link"
+          href="{{basePath}}isler/index.html"
+        >
+          İşler
+        </a>
+      </li>
+
+
+      <li>
+        <a
+          class="c-nav-mobile__link"
+          href="{{basePath}}calisma-sekli/index.html"
+        >
+          Çalışma Şekli
+        </a>
+      </li>
+
+
+      <li>
+        <a
+          class="c-nav-mobile__link"
+          href="{{basePath}}studio/index.html"
+        >
+          Stüdyo
+        </a>
+      </li>
+
+
+      <li>
+        <a
+          class="c-nav-mobile__link"
+          href="{{basePath}}iletisim/index.html"
+        >
+          İletişim
+        </a>
+      </li>
+
+
+    </ul>
+
+  </nav>
+
+
+  <div class="c-nav-mobile__footer">
+
+    <a
+      class="
+        c-button
+        c-button--primary
+        c-button--lg
+        c-button--block
+      "
+      href="https://wa.me/905050432716?text={{waHero}}"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+
+      <svg
+        class="c-icon c-icon--sm"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <use href="#i-whatsapp"></use>
+      </svg>
+
+      WhatsApp'tan yazın
+
+    </a>
+
+  </div>
+
+</div>

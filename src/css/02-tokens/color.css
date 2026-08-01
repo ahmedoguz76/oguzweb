@@ -1,0 +1,99 @@
+/**
+ * 02 · TOKENS — COLOR
+ * ============================================================================
+ * İki renkli sistem: mürekkep ve kâğıt. Vurgu üçüncü ve KIT kaynaktır —
+ * görünür alanın %5'ini geçmez. (PHASE 06 §8)
+ *
+ * KATMAN KURALI (K3 · marka taşınabilirliği):
+ *   · Bileşen dosyaları YALNIZCA semantic token kullanır.
+ *   · Bir bileşen dosyasında --ink-* / --paper-* / --accent-* görünüyorsa
+ *     bu bir hatadır ve kod incelemesinde reddedilir.
+ *   · Marka değişikliği = yalnızca aşağıdaki primitive bloğun değişmesi.
+ */
+
+:root {
+  /* ---------------------------------------------------- primitive · ink
+     Saf siyah kullanılmıyor: ekranda sert görünür ve kâğıt metaforunu bozar.
+     Sıcak nötr seçildi — soğuk gri "klinik/teknoloji" kodu taşır ve
+     "premium ama soğuk olmasın" kriteriyle çelişir. */
+  --ink-900: #16130f;
+  --ink-700: #3b342c;
+  --ink-500: #6e655a;
+  --ink-300: #a99f92;
+  --ink-200: #d6cfc4;
+  --ink-100: #e9e3d9;
+
+  /* --------------------------------------------------- primitive · paper
+     Sayfa zemini kırık beyaz. Saf beyaz parlar, uzun okumada yorar ve
+     "varsayılan/template" hissi verir. Tek başına en yüksek etkili
+     renk kararı budur. */
+  --paper-000: #ffffff;
+  --paper-100: #fbf9f5;
+  --paper-200: #f4f0e9;
+  --paper-300: #ebe5db;
+
+  /* -------------------------------------------------- primitive · accent
+     Derin yeşil-mürekkep. Klinik mavi bilinçli reddedildi: sağlık
+     sektörünün en tüketilmiş rengi ve aynı zamanda SaaS kodu. */
+  --accent-900: #1b3a31;
+  --accent-700: #275447;
+  --accent-100: #e4ede9;
+
+  /* ---------------------------------------------------- primitive · state
+     Doygunluğu düşürülmüş; parlak kırmızı/yeşil editöryel sakinliği bozar.
+     Yalnızca formda kullanılır, içerikte yeri yoktur. */
+  --state-error-ink: #8c2f22;
+  --state-success-ink: #2e5d3a;
+
+  /* =================================================== semantic · surface */
+  --surface-page: var(--paper-100);
+  --surface-alt: var(--paper-200);
+  --surface-media: var(--paper-000);
+  --surface-inverse: var(--ink-900);
+
+  /* ====================================================== semantic · text */
+  --text-primary: var(--ink-900);
+  --text-secondary: var(--ink-700);
+  --text-muted: var(--ink-500);
+  --text-accent: var(--accent-900);
+  --text-inverse: var(--paper-100);
+  --text-error: var(--state-error-ink);
+  --text-success: var(--state-success-ink);
+
+  /* ==================================================== semantic · border */
+  --border-subtle: var(--ink-200);
+  --border-strong: var(--ink-500);
+  --border-focus: var(--accent-900);
+  --border-error: var(--state-error-ink);
+
+  /* ==================================================== semantic · action */
+  --action-primary-bg: var(--ink-900);
+  --action-primary-bg-hover: var(--ink-700);
+  --action-primary-text: var(--paper-100);
+  --action-secondary-border: var(--ink-500);
+  --action-accent: var(--accent-900);
+  --action-disabled-bg: var(--ink-300);
+
+  /* ===================================================== semantic · misc */
+  --selection-bg: var(--accent-100);
+  --selection-text: var(--ink-900);
+  --overlay-scrim: rgb(22 19 15 / 0.45);
+}
+
+/**
+ * KONTRAST DOĞRULAMASI (WCAG 2.2 AA — PHASE 06 §8)
+ * ----------------------------------------------------------------------------
+ *   ink-900 / paper-100 ≈ 16.5:1   AAA   ✓ ana metin
+ *   ink-700 / paper-100 ≈  9.8:1   AAA   ✓ paragraf
+ *   ink-500 / paper-100 ≈  4.9:1   AA    ✓ yardımcı metin (sınırda — izlenecek)
+ *   ink-300 / paper-100 ≈  2.4:1   —     ✗ YALNIZCA dekoratif, metin yasak
+ *   accent-900 / paper-100 ≈ 10.2:1 AAA  ✓
+ *   paper-100 / ink-900 ≈ 16.5:1   AAA   ✓ birincil buton
+ *
+ * Bu değerler tasarım hedefidir. Teslim öncesi gerçek ekranda ÖLÇÜLEREK
+ * doğrulanır (kontrol listesi maddesi).
+ *
+ * KARANLIK MOD: v1.0'da yok. Kâğıt metaforu karanlık modda çöker.
+ * Token mimarisi sonradan eklemeye açık: yalnızca yukarıdaki semantic
+ * blok yeniden eşlenir, hiçbir bileşene dokunulmaz.
+ */

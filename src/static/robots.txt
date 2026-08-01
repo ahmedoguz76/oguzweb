@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# K5 · Geliştirme sayfaları. `npm run build:prod` bunları dist'e hiç
+# koymuyor; bu satırlar, yanlışlıkla `npm run build` ile yayınlanırsa
+# ikinci bir güvenlik ağı olarak duruyor.
+Disallow: /_dev-tokens
+Disallow: /_dev-layout
+Disallow: /_dev-primitives
+Disallow: /_dev-global
+
+# Form sonrası teşekkür sayfası — arama sonucunda görünmesi anlamsız.
+Disallow: /iletisim/basarili/
+
+Sitemap: https://oguzweb.com.tr/sitemap.xml

@@ -1,0 +1,50 @@
+/**
+ * 05 · COMPONENTS — ICON
+ * ============================================================================
+ * İkon TEK BAŞINA anlam taşımaz. Her ikonun ya görünür metin karşılığı ya da
+ * erişilebilir etiketi olur. (P7)
+ *
+ * İçerik bölümlerinde DEKORATİF ikon yoktur: her hizmetin başına bir ikon
+ * koymak web'in en tanınabilir template işaretidir. İkonlar yalnızca
+ * işlevsel yerlerde bulunur — eylem, yön, kanal.
+ *
+ * Toplam envanter: 10. Kütüphane kullanılmaz. (PHASE 06 §15)
+ */
+
+.c-icon {
+  /* inline-block değil: flex hizalaması ve satır yüksekliği artığı sorunları
+     için block + explicit boyut daha öngörülebilir */
+  display: block;
+  inline-size: 24px;
+  block-size: 24px;
+  flex: 0 0 auto;
+
+  /* Metinden renk devralır — tek kaynak, tutarlılık garantisi */
+  color: inherit;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.c-icon--sm {
+  inline-size: 20px;
+  block-size: 20px;
+}
+
+/**
+ * OPTİK HİZALAMA
+ * ----------------------------------------------------------------------------
+ * Metnin yanındaki ikon, matematiksel merkeze göre hizalandığında bir tık
+ * yukarıda durur: harflerin optik ağırlık merkezi x-yüksekliğindedir, kutunun
+ * ortasında değil. Göz doğruyu görür, ölçü değil. (§21/H4)
+ */
+.c-icon--inline {
+  display: inline-block;
+  vertical-align: -0.18em;
+}
+
+/* Yön ikonları hareket ettiğinde yalnızca transform animasyonu yapılır —
+   düzen yeniden hesaplaması tetiklenmez. */
+.c-icon--motion {
+  transition: transform var(--duration-fast) var(--ease-out);
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  K5 · Üç ölü URL kaldırıldı: /isler/lumea-smile-studio/, /isler/mehmet-kemal/,
+  /isler/flowos/ — bu sayfalar projede yok, Google tarayıp 404 alıyordu.
+  Tekrarlanan 404'ler tarama bütçesini yer ve kalite sinyalini düşürür.
+
+  Listelenmeyenler ve nedenleri:
+    /404/                  hata sayfası — dizine girmemeli
+    /iletisim/basarili/    form sonrası teşekkür sayfası — tek başına anlamsız
+    /_dev-*                geliştirme araçları — üretim derlemesinde zaten yok
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://oguzweb.com.tr/</loc></url>
+  <url><loc>https://oguzweb.com.tr/isler/</loc></url>
+  <url><loc>https://oguzweb.com.tr/isler/dent-notes/</loc></url>
+  <url><loc>https://oguzweb.com.tr/isler/doruk-smile/</loc></url>
+  <url><loc>https://oguzweb.com.tr/isler/sukru-gulalan/</loc></url>
+  <url><loc>https://oguzweb.com.tr/calisma-sekli/</loc></url>
+  <url><loc>https://oguzweb.com.tr/studio/</loc></url>
+  <url><loc>https://oguzweb.com.tr/iletisim/</loc></url>
+  <url><loc>https://oguzweb.com.tr/gizlilik/</loc></url>
+  <url><loc>https://oguzweb.com.tr/cerez-politikasi/</loc></url>
+</urlset>

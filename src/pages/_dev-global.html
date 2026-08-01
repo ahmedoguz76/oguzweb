@@ -1,0 +1,104 @@
+<!-- meta {
+  "title": "ODS v1.0 · global bileşenler (geliştirme)",
+  "description": "Geliştirme aracı.",
+  "canonical": "https://oguzweb.com.tr/_dev-global",
+  "robots": "noindex, nofollow"
+} -->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <!-- include: head.html -->
+  <style>
+    /* Yalnızca bu geliştirme sayfasına ait. Yayına çıkmaz. */
+    .g-note { font-size: var(--type-body-s); color: var(--text-muted);
+      max-inline-size: var(--measure-reading); }
+    .g-h { font-family: var(--font-text); font-size: var(--type-label);
+      letter-spacing: var(--track-label); font-weight: var(--weight-semibold);
+      color: var(--text-accent); padding-block-end: 1rem; }
+    .g-block { padding-block-end: 4rem; }
+    .g-tall { padding-block: 4rem; }
+    .g-tall p { padding-block-end: 2rem; }
+    .g-status { font-family: var(--font-text); font-size: var(--type-caption);
+      font-variant-numeric: tabular-nums; color: var(--text-muted); }
+    .g-status b { color: var(--text-primary); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <!-- include: icon-sprite.html -->
+
+  <a class="c-link--skip" href="#icerik">İçeriğe geç</a>
+
+  <!-- include: header.html -->
+
+  <main id="icerik">
+    <div class="l-container">
+
+      <section class="g-block g-tall">
+        <p class="g-h">Global bileşen doğrulaması</p>
+        <p class="g-note">
+          Aşama 4 çıktısı. Bu sayfa yayına çıkmaz.
+        </p>
+
+        <p class="g-status" style="padding-block-start:1.5rem">
+          viewport <b id="vw">—</b> ·
+          header <b id="hh">—</b> ·
+          menü <b id="ms">—</b> ·
+          kaydırma kilidi <b id="lock">—</b> ·
+          hareket azaltma <b id="rm">—</b>
+        </p>
+      </section>
+
+      <section class="g-block">
+        <p class="g-h">Kontrol listesi</p>
+        <ul class="u-measure g-note">
+          <li><b>Tab</b> — ilk odak atlama bağlantısına gitmeli</li>
+          <li>&lt;768px'te menü ikonu görünür, ≥768px'te kaybolur</li>
+          <li>Menü açılınca odak <b>kapatma butonuna</b> gider</li>
+          <li><b>Esc</b>, dış alana tıklama ve masaüstüne geçiş menüyü kapatır</li>
+          <li>Kapanışta odak <b>tetikleyiciye</b> döner, kaydırma kilidi temizlenir</li>
+          <li>400px'ten sonra aşağı kaydırınca header gizlenir, yukarı kaydırınca belirir</li>
+          <li>Hareket azaltma açıkken header <b>hiç</b> gizlenmez</li>
+          <li>JS kapalıyken tetikleyici kaybolur, navigasyon akışta kalır</li>
+        </ul>
+      </section>
+
+      <section class="g-block g-tall">
+        <p class="g-h">Kaydırma alanı</p>
+        <p class="g-note">Header davranışını görmek için aşağı kaydırın.</p>
+        <div style="block-size:200vh"></div>
+        <p class="g-note">Şimdi yukarı kaydırın — header belirmeli.</p>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- include: footer.html -->
+
+  <script type="module" src="{{jsPath}}"></script>
+  <script type="module">
+    const $ = (id) => document.getElementById(id);
+    const panel = document.querySelector("[data-nav-panel]");
+    const header = document.querySelector("[data-header]");
+    const rm = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function read() {
+      $("vw").textContent = `${window.innerWidth}px`;
+      $("hh").textContent =
+        `${Math.round(header.getBoundingClientRect().height)}px` +
+        (header.classList.contains("is-hidden") ? " · gizli" : " · görünür");
+      $("ms").textContent = panel.classList.contains("is-open") ? "açık" : "kapalı";
+      $("lock").textContent =
+        document.body.classList.contains("u-no-scroll") ? "aktif" : "yok";
+      $("rm").textContent = rm.matches ? "açık" : "kapalı";
+    }
+
+    read();
+    addEventListener("resize", read);
+    addEventListener("scroll", read, { passive: true });
+    new MutationObserver(read).observe(document.documentElement, {
+      attributes: true, subtree: true, attributeFilter: ["class"],
+    });
+  </script>
+</body>
+</html>

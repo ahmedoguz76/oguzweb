@@ -1,0 +1,110 @@
+/**
+ * 02 · TOKENS — LAYOUT
+ * ============================================================================
+ * Konteyner genişliği SABİT, kenar boşluğu ARTAN. Ekran büyüdükçe içerik
+ * genişlemez — boşluk genişler. Bu, Yön A'nın tanımlayıcı davranışıdır.
+ * (PHASE 06 §4)
+ *
+ * Breakpoint'ler rem cinsinden: kullanıcı tarayıcı yazı boyutunu büyütürse
+ * düzen de uyum sağlar. px breakpoint bu kullanıcıyı görmezden gelir.
+ *   26.875rem = 430px · 48rem = 768px · 64rem = 1024px
+ *   80rem = 1280px · 90rem = 1440px
+ */
+
+:root {
+  /* ------------------------------------------------------- konteynerler */
+  --container-max: 77.5rem;      /* 1240px — 1440'ta 80+80 kenar bırakır */
+  --container-narrow: 55rem;     /*  880px */
+  --container-reading: 40rem;    /*  640px */
+
+  /* ---------------------------------------------- kenar boşluğu (taban) */
+  --container-pad: var(--space-5);  /* 20px @ 360–429 */
+
+  /* -------------------------------------------------------- ızgara */
+  --grid-columns: 12;
+  --grid-gutter: var(--space-4);    /* 16px @ <768 */
+
+  /* ------------------------------------------------------- kenarlık
+     Kenarlık YAPISALDIR, dekoratif değil. Kart çerçevesi yok. */
+  --border-hairline: 1px;
+  --border-strong-width: 2px;
+
+  /* ---------------------------------------------------------- köşe
+     Yuvarlatma miktarı "ürün/yazılım" ile "yayın/matbaa" eksenini belirler.
+     8px+ = SaaS dili = reddedildi. 0 = etkileşimli kontrollerde fazla sert.
+     2px: göz fark etmez, el hisseder. */
+  --radius-none: 0;
+  --radius-xs: 2px;
+
+  /* --------------------------------------------------------- gölge
+     Gölge, Material'ın yükseklik metaforudur ve kâğıt metaforuyla çelişir:
+     basılı bir sayfada hiçbir şey havada durmaz.
+     Tek istisna mobil menü — orada gerçekten üst üste binen katman var. */
+  --shadow-none: none;
+  --shadow-overlay: 0 8px 32px rgb(22 19 15 / 0.12);
+
+  /* -------------------------------------------------------- z-index
+     Adlandırılmış skala. Rastgele 9999 yasak. */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-header: 100;
+  --z-overlay: 200;
+  --z-skiplink: 300;
+
+  /* --------------------------------------------- kontrol yükseklikleri
+     Buton ve form alanı yükseklikleri boşluk skalasından DEĞİL, kendi
+     skalasından gelir: bunlar boşluk değil, dokunma hedefidir. rem cinsinden
+     tanımlanır ki kullanıcı tarayıcı yazı boyutunu büyüttüğünde kontrol de
+     büyüsün. (PHASE 06 §12) */
+  --control-sm: 2.75rem;  /* 44px */
+  --control-md: 3rem;     /* 48px — varsayılan */
+  --control-lg: 3.5rem;   /* 56px */
+
+  /* DÜZELTME · PHASE 06 §12 iç çelişkisi
+     Spesifikasyon aynı anda iki şey söylüyordu:
+       "button-sm = 40px"  ve  "44px asgari; sm bile bu sınırın üstünde"
+     40 < 44 — ikisi aynı anda doğru olamaz. Playwright bunu yakaladı.
+     Erişilebilirlik taahhüdü, boyut skalası tercihinden güçlüdür:
+     sm 44px'e çekildi. Kural kazandı, sayı değil. */
+
+  /* Portre azami genişliği (mobil).
+     360px'te 4:5 portre tam genişlikte 450px yükseklik kaplar — ekranın
+     yarısı. Bu, kişiye sayfadaki en büyük görsel ağırlığı verir ve stüdyo
+     dengesini kişisel markaya kaydırır. (PHASE 07 · Bölüm 05) */
+  --portrait-max: 15rem;  /* 240px */
+
+  /* ------------------------------------------- dokunma hedefi (asgari)
+     WCAG 2.2 AA tabanı 24px'tir; 44px seçildi. Hedef kitlenin yaş
+     ortalaması düşünüldüğünde doğru olan budur. */
+  --target-min: 2.75rem; /* 44px */
+
+  /* ------------------------------------------------- header yüksekliği */
+  --header-height: 4rem; /* 64px @ <768 */
+}
+
+@media (min-width: 26.875rem) { /* 430px */
+  :root {
+    --container-pad: var(--space-6); /* 24px */
+  }
+}
+
+@media (min-width: 48rem) { /* 768px */
+  :root {
+    --container-pad: var(--space-10); /* 40px */
+    --grid-gutter: var(--space-6);    /* 24px */
+    --header-height: 4.5rem;          /* 72px */
+  }
+}
+
+@media (min-width: 64rem) { /* 1024px */
+  :root {
+    --container-pad: var(--space-16); /* 64px — kitap kenar boşluğu */
+    --grid-gutter: var(--space-8);    /* 32px */
+  }
+}
+
+@media (min-width: 80rem) { /* 1280px */
+  :root {
+    --container-pad: var(--space-20); /* 80px — maksimum editöryel nefes */
+  }
+}

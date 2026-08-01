@@ -1,0 +1,163 @@
+<!-- meta {
+  "title": "ODS v1.0 · düzen doğrulama (geliştirme)",
+  "description": "Geliştirme aracı.",
+  "canonical": "https://oguzweb.com.tr/_dev-layout",
+  "robots": "noindex, nofollow"
+} -->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <!-- include: head.html -->
+  <style>
+    /* Yalnızca bu geliştirme sayfasına ait. Yayına çıkmaz. */
+    .dev-readout { position: sticky; inset-block-start: 0; z-index: 300;
+      background: var(--ink-900); color: var(--paper-100);
+      font-family: var(--font-text); font-size: var(--type-caption);
+      font-variant-numeric: tabular-nums; padding: 0.5rem 1rem; }
+    .dev-readout b { font-weight: 600; }
+    .dev-label { font-family: var(--font-text); font-size: var(--type-caption);
+      color: var(--text-muted); }
+    /* Izgara sütunlarını görünür kılan geliştirme katmanı */
+    .dev-cols { position: absolute; inset: 0; pointer-events: none;
+      display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: var(--grid-gutter); }
+    .dev-cols span { background: var(--accent-100); }
+    .dev-stage { position: relative; padding-block: 2rem; }
+    .dev-fill { background: var(--ink-200); padding: 0.5rem 0.75rem;
+      font-family: var(--font-text); font-size: var(--type-caption); }
+    .dev-fill--a2 { background: var(--accent-100); }
+  </style>
+</head>
+<body>
+
+  <div class="dev-readout">
+    viewport <b id="vw">—</b> ·
+    container-pad <b id="pad">—</b> ·
+    gutter <b id="gut">—</b> ·
+    section <b id="sec">—</b> ·
+    oran <b id="ratio">—</b>
+  </div>
+
+  <main id="icerik">
+
+    <!-- ŞERİT DAVRANIŞI · A1 ekseni -->
+    <section class="l-section">
+      <div class="l-container">
+        <span class="l-section__label">A1 ekseni · şerit davranışı</span>
+        <div class="l-section__body dev-stage">
+          <div class="dev-cols">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="l-grid">
+            <div class="l-lane l-lane--full">
+              <p class="dev-fill" data-lane="full">lane-full · 12/12</p>
+            </div>
+          </div>
+          <div class="l-grid">
+            <div class="l-lane l-lane--wide">
+              <p class="dev-fill" data-lane="wide">lane-wide · 10 / 12 / 12 / 12</p>
+            </div>
+          </div>
+          <div class="l-grid">
+            <div class="l-lane l-lane--standard">
+              <p class="dev-fill" data-lane="standard">lane-standard · 8 / 10 / 12 / 12</p>
+            </div>
+          </div>
+          <div class="l-grid">
+            <div class="l-lane l-lane--reading">
+              <p class="dev-fill" data-lane="reading">lane-reading · 6 / 8 / 10 / 12</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- İKİNCİ EKSEN · yalnızca >=1280px -->
+    <section class="l-section">
+      <div class="l-container">
+        <span class="l-section__label">A2 ekseni · yalnızca ≥1280px</span>
+        <div class="l-section__body dev-stage">
+          <div class="dev-cols">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="l-grid l-grid--axis-2">
+            <div class="l-lane l-lane--standard">
+              <p class="dev-fill dev-fill--a2" data-lane="a2-standard">
+                A2 · lane-standard — 1280px altında A1'e düşer
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAŞMA TESTİ · uzun Türkçe kelimeler ve geniş içerik -->
+    <section class="l-section">
+      <div class="l-container">
+        <span class="l-section__label">Taşma dayanıklılığı</span>
+        <div class="l-section__body">
+          <div class="l-grid">
+            <div class="l-lane l-lane--reading">
+              <p>Muvaffakiyetsizleştiricileştiriveremeyebileceklerimizdenmişsinizcesine
+                kuyruklu bir kelime, dar şeritte taşmamalı.</p>
+              <p>https://oguzweb.com.tr/isler/cok-uzun-bir-proje-adresi-ornegi-taşma-testi</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SATIR LİSTESİ · hairline ritmi -->
+    <section class="l-section">
+      <div class="l-container">
+        <span class="l-section__label">Ayraçlı satır listesi</span>
+        <div class="l-section__body">
+          <div class="l-grid">
+            <div class="l-lane l-lane--standard l-rows">
+              <div class="dev-label">Satır bir</div>
+              <div class="dev-label">Satır iki</div>
+              <div class="dev-label">Satır üç</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KAPANIŞ · en büyük boşluk -->
+    <section class="l-section l-section--closing">
+      <div class="l-container">
+        <div class="l-grid">
+          <div class="l-lane l-lane--standard">
+            <p class="dev-label">Kapanış bölümü · üstünde sayfadaki en büyük boşluk</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module">
+    const px = (v) => `${Math.round(parseFloat(v))}px`;
+    const read = () => {
+      const cs = getComputedStyle(document.documentElement);
+      const pad = parseFloat(cs.getPropertyValue("--container-pad"));
+      const gut = parseFloat(cs.getPropertyValue("--grid-gutter"));
+      const sec = parseFloat(cs.getPropertyValue("--space-section"));
+      const inner = parseFloat(cs.getPropertyValue("--space-section-inner-max"));
+      document.getElementById("vw").textContent = `${window.innerWidth}px`;
+      document.getElementById("pad").textContent = px(pad + "px");
+      document.getElementById("gut").textContent = px(gut + "px");
+      document.getElementById("sec").textContent = px(sec + "px");
+      const r = (sec / inner).toFixed(2);
+      const el = document.getElementById("ratio");
+      el.textContent = `${r} ${r >= 2.5 ? "✓" : "✗"}`;
+    };
+    read();
+    addEventListener("resize", read);
+  </script>
+</body>
+</html>

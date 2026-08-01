@@ -1,0 +1,40 @@
+/**
+ * 04 · LAYOUT — CONTAINER
+ * ============================================================================
+ * Konteyner genişliği SABİT, kenar boşluğu ARTAN.
+ *
+ * Ekran büyüdükçe içerik genişlemez — boşluk genişler. Bu, Yön A'nın
+ * tanımlayıcı davranışıdır ve ekranın tamamını doldurmamanın bilinçli
+ * tercihidir: ekranı doldurmak ucuz, kontrollü genişlik pahalı görünür.
+ * (PHASE 06 §4 / PHASE 07 §0)
+ *
+ * 1240px seçimi: 1440px ekranda 80+80 kenar bırakır ve 12 sütun + 11 gutter
+ * tam oturur → 12 × 74px + 11 × 32px = 888 + 352 = 1240 ✓
+ */
+
+.l-container {
+  inline-size: 100%;
+  max-inline-size: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+/* Dar varyantlar — uzun metin blokları için. Kenar boşluğunu miras alır. */
+.l-container--narrow {
+  max-inline-size: var(--container-narrow);
+}
+
+.l-container--reading {
+  max-inline-size: var(--container-reading);
+}
+
+/**
+ * Tam genişlik kaçışı.
+ * v1.0'da yalnızca yatay ayraçlar için. Bir bölümün zeminini renklendirmek
+ * için KULLANILMAZ: bölümler boşlukla ayrılır, zeminle değil (P2).
+ */
+.l-bleed {
+  inline-size: 100%;
+  max-inline-size: none;
+  padding-inline: 0;
+}

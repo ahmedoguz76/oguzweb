@@ -1,0 +1,28 @@
+{
+  "name": "oguzweb",
+  "version": "1.0.0",
+  "private": true,
+  "description": "OğuzWeb — resmi web sitesi. Editöryel Sessizlik + sistem disiplini.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node tools/build.js",
+    "build:prod": "node tools/build.js --prod",
+    "dev": "node tools/build.js && node tools/serve.js",
+    "watch": "node tools/build.js --watch",
+    "fonts": "node tools/fonts.js",
+    "images": "node tools/images.js",
+    "audit": "node tools/audit.js",
+    "check": "node tools/audit.js && node tools/build.js",
+    "test": "playwright test"
+  },
+  "optionalDependencies": {
+    "sharp": "^0.33.0"
+  },
+  "comments": {
+    "bagimlilik": "Çalışma zamanında sıfır bağımlılık. sharp yalnızca görsel dönüşümü için ve opsiyoneldir; kurulmazsa images.js açıklayıcı bir mesajla durur, build etkilenmez.",
+    "js-kucultme": "Bilinçli olarak yok. Regex tabanlı JS küçültme doğruluk riski taşır; kazanç ~1 KB. Risk/kazanç oranı kabul edilmedi."
+  }
+}

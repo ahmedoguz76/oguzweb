@@ -1,0 +1,88 @@
+/**
+ * 05 · COMPONENTS — IMAGE
+ * ============================================================================
+ * Görseller: çerçeve yok, kenarlık yok, gölge yok, yuvarlatma yok,
+ * tarayıcı çerçevesi yok. Görsel sayfaya DOĞRUDAN oturur. (PHASE 06 §20)
+ *
+ * EN-BOY ORANI SABİT SETTİR: 16:10 · 4:5 · 3:2. Bu üçü dışında oran
+ * kullanılmaz — serbest oran sayfada görünmez bir düzensizlik üretir ve göz
+ * bunu "özensiz" olarak okur.
+ *
+ * CLS ≤ 0.02 için ÜÇ KATLI güvence:
+ *   1. HTML'de açık width/height   (asıl önlem)
+ *   2. aspect-ratio CSS'te          (HTML'de unutulursa yakalar)
+ *   3. block-size: auto             (oranı bozacak yükseklik gelmesin)
+ */
+
+.c-image {
+  display: block;
+  margin: 0;
+}
+
+/**
+ * Medya kabı — oranı burası tutar.
+ * Görselin kendisi değil kap oranlanır: görsel henüz yüklenmemişken bile
+ * yer ayrılmış olur ve düzen kaymaz.
+ */
+.c-image__media {
+  display: block;
+  position: relative;
+  inline-size: 100%;
+  overflow: hidden;
+  background-color: var(--surface-alt);
+}
+
+.c-image__media img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-none);
+}
+
+/* ------------------------------------------------------------- oran seti */
+.c-image--16-10 .c-image__media { aspect-ratio: 16 / 10; }
+.c-image--4-5   .c-image__media { aspect-ratio: 4 / 5; }
+.c-image--3-2   .c-image__media { aspect-ratio: 3 / 2; }
+
+/**
+ * Künye.
+ * İşletme adı ve sektör, görselin ALTYAZISIDIR — ayrı bir metin bloğu değil.
+ * Bu, HTML'de figure/figcaption ilişkisiyle de kurulur.
+ */
+.c-image__caption {
+  padding-block-start: var(--space-6);
+  font-family: var(--font-text);
+  font-size: var(--type-body-s);
+  line-height: var(--line-body-s);
+  color: var(--text-muted);
+}
+
+/**
+ * Tıklanabilir görsel.
+ * Çerçeve olmadığı için tıklanabilirlik başka türlü anlaşılmaz: üzerine
+ * gelindiğinde opaklık düşer. Hover'da YÜKSELME veya ölçek yok — gölge
+ * yasağıyla aynı gerekçe. (PHASE 07 · Bölüm 02)
+ */
+.c-image--interactive .c-image__media img {
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.c-image--interactive:hover .c-image__media img,
+.c-image--interactive:focus-within .c-image__media img {
+  opacity: 0.92;
+}
+
+/**
+ * Portre.
+ * Sitedeki TEK insan fotoğrafı. Dikdörtgen kadraj: yuvarlak avatar sosyal
+ * medya/profil kodu taşır ve stüdyo algısını düşürür. (PHASE 06 §10)
+ */
+.c-image--portrait {
+  max-inline-size: var(--portrait-max);
+}
+
+@media (min-width: 48rem) { /* 768px */
+  .c-image--portrait {
+    max-inline-size: none;
+  }
+}

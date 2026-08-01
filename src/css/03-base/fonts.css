@@ -1,0 +1,12 @@
+/**
+ * 03 · BASE — FONTS
+ * ============================================================================
+ * OğuzWeb teslim paketinde harici font isteği yapılmaz. Türkçe karakterleri
+ * güvenilir biçimde çizen sistem fontları kullanılır. Bu tercih; yerel önizleme,
+ * canlı yayın, gizlilik ve performans açısından tutarlı bir sonuç verir.
+ */
+
+:root {
+  --font-display: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-text: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}

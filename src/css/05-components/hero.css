@@ -1,0 +1,195 @@
+/**
+ * 05 · COMPONENTS — HERO
+ * ============================================================================
+ * Sayfadaki en yüksek riskli tek nokta: elenme burada olur. Tek işi,
+ * ziyaretçinin sekmeyi kapatmamasını sağlamak.
+ *
+ * REVİZYON — SaaS dilinden editöryel dile
+ * ----------------------------------------------------------------------------
+ * Önceki sürümde eğik tarayıcı mockup'ı, sonsuz süzülme (heroFloat), parlama
+ * (heroShine), radial glow ve dört katmanlı gölge vardı. Bunlar "Yön C —
+ * Vitrin" diline aitti ve yasak listesinin dört maddesine aynı anda
+ * dokunuyordu: glassmorphism, gereksiz animasyon, abartılı efekt, gösteriş
+ * için tasarım. Ayrıca eğik cihaz mockup'ı PHASE 06 §20'de isim isim
+ * yasaklanmıştı.
+ *
+ * Yerine ne kondu: BOŞLUK, TİPOGRAFİ, HİYERARŞİ. Premium his efektten değil
+ * elemeden gelir.
+ *
+ * Tam ekran (100svh) DEĞİL. Tam ekran hero ziyaretçiyi hiçbir bilgi almadan
+ * kaydırmaya zorlar ve web'in en template'leşmiş kalıbıdır. Sonraki bölümün
+ * üst kenarının kadraja girmesi, kaydırma davetini animasyonsuz kurar.
+ */
+
+.c-hero {
+  position: relative;
+  padding-block-start: var(--space-16);
+  padding-block-end: var(--space-16);
+  overflow: hidden;
+}
+
+/* Tek sütun. Önceki iki sütunlu düzen görsel bir dolgu (mockup) gerektiriyordu;
+   o dolgu kalkınca ikinci sütunun gerekçesi de kalmadı. */
+.c-hero__grid {
+  display: grid;
+}
+
+.c-hero__kicker {
+  margin-block-end: var(--space-6);
+}
+
+/* Başlık sayfadaki en büyük tipografik olaydır — ve tek olaydır.
+   `text-wrap: balance` satır sonlarını dengeler, dul kelime bırakmaz. */
+.c-hero__title {
+  max-inline-size: 16ch;
+  margin-block-end: var(--space-6);
+  font-size: var(--type-display-xl);
+  line-height: var(--line-display-xl);
+  letter-spacing: var(--track-display-xl);
+  text-wrap: balance;
+}
+
+/* Vurgulu ikinci satır: italik + aksan yerine YALNIZCA aksan rengi.
+   İtalik serif, büyük puntoda dekoratif bir el yazısı etkisi veriyordu;
+   renk tek başına daha sessiz ve daha editöryel bir vurgu kurar. */
+.c-hero__title span {
+  color: var(--text-accent);
+  font-weight: inherit;
+}
+
+.c-hero__lead {
+  max-inline-size: var(--measure-lead);
+  margin-block-end: var(--space-10);
+  color: var(--text-secondary);
+  font-size: var(--type-body-l);
+  line-height: var(--line-body-l);
+  text-wrap: pretty;
+}
+
+/* TEK ANA CTA. Yanındaki bağlantı yumuşak köprüdür (eşiksiz), yarışan bir
+   eylem değil. Dolu buton ile altı çizili metin farkı hiyerarşiyi
+   tartışmasız kılar. */
+.c-hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-4);
+  margin-block-end: var(--space-16);
+}
+
+.c-hero__work-link {
+  font-weight: var(--weight-medium);
+}
+
+/* GÜVEN ALANI — kart değil, editöryel sütun.
+   Kart web'in en tüketilmiş bileşenidir ve template sinyali verir. Ayrım
+   yalnızca hairline ve boşlukla kurulur; kutu, gölge, zemin yok. */
+.c-hero__proof {
+  display: grid;
+  gap: var(--space-8);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-block-start: var(--border-hairline) solid var(--border-subtle);
+  padding-block-start: var(--space-8);
+}
+
+.c-hero__proof li {
+  display: grid;
+  gap: var(--space-2);
+  margin-block-end: 0;
+}
+
+.c-hero__proof strong {
+  font-family: var(--font-display);
+  font-size: var(--type-heading-s);
+  font-weight: var(--weight-medium);
+  line-height: var(--line-heading-s);
+  color: var(--text-primary);
+}
+
+.c-hero__proof span {
+  color: var(--text-muted);
+  font-size: var(--type-body-s);
+  line-height: var(--line-body-s);
+  max-inline-size: var(--measure-lead);
+}
+
+/* --------------------------------------------------------------- 430px+ */
+@media (min-width: 26.875rem) {
+  .c-hero__actions {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .c-hero__work-link {
+    inline-size: max-content;
+  }
+}
+
+/* --------------------------------------------------------------- 768px+ */
+@media (min-width: 48rem) {
+  .c-hero {
+    padding-block-start: var(--space-20);
+    padding-block-end: var(--space-20);
+  }
+
+  /* Üç sütunlu güven alanı. Eşit ağırlık: hiçbiri diğerinin önüne geçmez. */
+  .c-hero__proof {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-8);
+  }
+}
+
+/* -------------------------------------------------------------- 1024px+ */
+@media (min-width: 64rem) {
+  .c-hero {
+    padding-block-start: var(--space-24);
+    padding-block-end: var(--space-24);
+  }
+
+  .c-hero__title {
+    max-inline-size: 18ch;
+  }
+
+  .c-hero__proof {
+    gap: var(--space-12);
+  }
+}
+
+/**
+ * GİRİŞ HAREKETİ
+ * Tek, çok hafif belirme. Önceki 0.1s → 0.65s sıralı gecikme zinciri
+ * kaldırıldı: beş öğenin sırayla belirmesi sayfanın yavaş yüklendiği
+ * izlenimi veriyordu. Yalnızca opacity ve transform — düzen yeniden
+ * hesaplaması tetiklenmez. Sonsuz animasyon yok.
+ */
+.c-hero__content > * {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: heroReveal var(--duration-reveal) var(--ease-out) forwards;
+}
+
+.c-hero__content > *:nth-child(2) { animation-delay: 60ms; }
+.c-hero__content > *:nth-child(3) { animation-delay: 120ms; }
+.c-hero__content > *:nth-child(4) { animation-delay: 180ms; }
+.c-hero__content > *:nth-child(5) { animation-delay: 240ms; }
+
+@keyframes heroReveal {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Hareket azaltma isteniyorsa animasyon TAMAMEN kaldırılır. Reset katmanı
+   süreyi 0.01ms'ye indiriyor; ama süresi sıfırlanmış bir belirme, yumuşak
+   olandan daha rahatsız edicidir — sıçrayarak görünür. */
+@media (prefers-reduced-motion: reduce) {
+  .c-hero__content > * {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}

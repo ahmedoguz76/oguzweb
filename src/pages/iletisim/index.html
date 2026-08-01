@@ -1,0 +1,115 @@
+<!-- meta {
+  "title": "İletişim · OğuzWeb",
+  "description": "Web sitesi projenizi konuşmak için OğuzWeb ile iletişime geçin.",
+  "canonical": "https://oguzweb.com.tr/iletisim/",
+  "robots": "index, follow"
+} -->
+<!DOCTYPE html>
+<html lang="tr">
+<head><!-- include: head.html --></head>
+<body>
+  <!-- include: icon-sprite.html -->
+  <a class="c-link--skip" href="#icerik">İçeriğe geç</a>
+  <!-- include: header.html -->
+  <main id="icerik">
+    <section class="c-page-intro" aria-labelledby="h-iletisim">
+      <div class="l-container">
+        <div class="l-grid">
+          <div class="l-lane l-lane--reading">
+            <span class="l-section__label">İletişim</span>
+            <h1 id="h-iletisim">Projenizi anlatın. Uygun yolu birlikte netleştirelim.</h1>
+            <p class="c-page-intro__lead">Yeni bir web sitesi, mevcut sitenizin yenilenmesi veya özel bir dijital deneyim için kısa bir mesaj yeterli. Kapsamı, hedefi ve sonraki adımı doğrudan konuşuruz.</p>
+            <div class="c-page-intro__meta">
+              <span>Genellikle aynı gün dönüş</span>
+              <span>Ön görüşme ücretsiz</span>
+              <span>Zorunluluk yok</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="l-section" aria-labelledby="h-form">
+      <div class="l-container">
+        <div class="c-contact-layout">
+          <div class="c-contact-panel">
+            <h2 class="c-contact-panel__title" id="h-form">Kısa proje formu</h2>
+            <p class="c-contact-panel__copy">Birkaç temel bilgi paylaşın. Mesajınız doğrudan bana ulaşır; e-posta uygulaması açılmaz.</p>
+            <ul class="c-contact-list">
+              <li class="c-contact-list__item"><span class="c-contact-list__label">E-posta</span><a href="mailto:oguzdesigntr@outlook.com">oguzdesigntr@outlook.com</a></li>
+              <li class="c-contact-list__item"><span class="c-contact-list__label">Telefon</span><a href="tel:+905050432716">0505 043 27 16</a></li>
+              <li class="c-contact-list__item"><span class="c-contact-list__label">WhatsApp</span><a href="https://wa.me/905050432716?text={{waContact}}" target="_blank" rel="noopener noreferrer">Mesaj gönderin</a></li>
+              <li class="c-contact-list__item"><span class="c-contact-list__label">Çalışma bölgesi</span><span>Ankara · Türkiye geneli uzaktan</span></li>
+              <li class="c-contact-list__item"><span class="c-contact-list__label">Uygun projeler</span><span>Klinikler, hekimler, estetik merkezleri ve premium yerel işletmeler</span></li>
+            </ul>
+          </div>
+
+          <form
+            class="c-form"
+            action="https://formsubmit.co/oguzdesigntr@outlook.com"
+            method="post"
+            data-contact-form
+            novalidate
+          >
+            <input type="hidden" name="_subject" value="OğuzWeb üzerinden yeni proje talebi">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="true">
+            <input type="hidden" name="_next" value="https://oguzweb.com.tr/iletisim/basarili/">
+
+            <div class="c-field c-field--honeypot" aria-hidden="true">
+              <label class="c-field__label" for="website">Web sitesi</label>
+              <input class="c-field__control" id="website" name="_honey" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="c-field">
+              <label class="c-field__label" for="ad">Ad soyad</label>
+              <input class="c-field__control" id="ad" name="Ad soyad" type="text" autocomplete="name" required minlength="2">
+              <p class="c-field__error" data-error-for="ad" aria-live="polite"></p>
+            </div>
+
+            <div class="c-field">
+              <label class="c-field__label" for="isletme">İşletme veya marka <span class="c-field__optional">(isteğe bağlı)</span></label>
+              <input class="c-field__control" id="isletme" name="İşletme" type="text" autocomplete="organization">
+            </div>
+
+            <div class="c-field">
+              <label class="c-field__label" for="telefon">Telefon</label>
+              <input class="c-field__control" id="telefon" name="Telefon" type="tel" autocomplete="tel" inputmode="tel" placeholder="05xx xxx xx xx">
+              <p class="c-field__hint">Telefon veya e-posta alanlarından en az birini doldurun.</p>
+              <p class="c-field__error" data-error-for="telefon" aria-live="polite"></p>
+            </div>
+
+            <div class="c-field">
+              <label class="c-field__label" for="eposta">E-posta</label>
+              <input class="c-field__control" id="eposta" name="E-posta" type="email" autocomplete="email" inputmode="email" placeholder="ornek@eposta.com">
+              <p class="c-field__error" data-error-for="eposta" aria-live="polite"></p>
+            </div>
+
+            <div class="c-field">
+              <label class="c-field__label" for="proje">Neye ihtiyacınız var?</label>
+              <textarea class="c-field__control" id="proje" name="Proje özeti" required minlength="20"></textarea>
+              <p class="c-field__hint">Mevcut siteniz, hedefiniz ve yaklaşık takviminiz varsa ekleyebilirsiniz.</p>
+              <p class="c-field__error" data-error-for="proje" aria-live="polite"></p>
+            </div>
+
+            <div class="c-consent">
+              <input class="c-consent__input" id="kvkk" name="KVKK onayı" type="checkbox" value="Onaylandı" required>
+              <label class="c-consent__label" for="kvkk">
+                <a href="../gizlilik/index.html">Gizlilik politikasını</a> okudum; iletişim talebimin yanıtlanması amacıyla bilgilerimin işlenmesini kabul ediyorum.
+              </label>
+            </div>
+            <p class="c-field__error" data-error-for="kvkk" aria-live="polite"></p>
+
+            <div class="c-form__status" data-form-status role="status" aria-live="polite"></div>
+
+            <button class="c-button c-button--primary c-button--lg" type="submit" data-submit-button>Mesajı gönderin</button>
+            <p class="c-form__note">Bilgileriniz yalnızca talebinize dönüş yapmak için kullanılır. Form gönderimi güvenli bağlantı üzerinden gerçekleştirilir.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- include: footer.html -->
+  <script type="module" src="{{jsPath}}"></script>
+</body>
+</html>

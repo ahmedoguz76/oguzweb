@@ -1,0 +1,154 @@
+/**
+ * 05 · COMPONENTS — BUTTON
+ * ============================================================================
+ * HİYERARŞİ (PHASE 06 §12 / PHASE 07)
+ *   primary    dolu · tek ana eylem (WhatsApp) · görünür alanda EN FAZLA 1
+ *   secondary  hairline kenarlıklı · alternatif eylem (form)
+ *   tertiary   altı çizili metin + ok · yumuşak köprü ("Tüm işleri görün")
+ *
+ * Sistem, "tek birincil eylem" kuralını GÖRSEL olarak zorlar: yan yana iki
+ * dolu buton gelirse sistem yanlış kullanılıyor demektir. Dolu buton ile altı
+ * çizili metin arasındaki fark, hiyerarşiyi tartışmasız kılar.
+ *
+ * VURGU RENGİ NEDEN BİRİNCİL BUTONDA DEĞİL
+ * ----------------------------------------------------------------------------
+ * Koyu dolu buton editöryel dilde daha güçlü ve daha zamansızdır; vurgu rengi
+ * kıt kalmalıdır (görünür alanın <%5'i). Vurgu, buton yerine odak halkasında
+ * ve bölüm etiketlerinde yaşar. (PHASE 06 §8)
+ *
+ * KATMAN NOTU
+ * ----------------------------------------------------------------------------
+ * base katmanı `a` öğesine alt çizgi verir. components katmanı base'in
+ * üstündedir; bu yüzden aşağıdaki `text-decoration: none` özgüllük savaşı
+ * olmadan kazanır. Katman sırasının pratik faydası tam olarak budur.
+ */
+
+.c-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+
+  /* Dokunma hedefi tabanı — en küçük varyant bile bu sınırın altına inmez.
+     WCAG 2.2 AA tabanı 24px; 44px seçildi çünkü hedef kitlenin yaş
+     ortalaması düşünüldüğünde doğru olan budur.
+     Boyut skalası: sm 44 · md 48 · lg 56 (bkz. layout.css düzeltme notu). */
+  min-block-size: var(--target-min);
+
+  padding-inline: var(--space-6);
+  padding-block: var(--space-3);
+
+  font-family: var(--font-text);
+  font-size: var(--type-body-m);
+  font-weight: var(--weight-semibold);
+  line-height: var(--line-tight);
+  letter-spacing: var(--track-normal);
+  text-align: center;
+  text-decoration: none;
+
+  border: var(--border-hairline) solid transparent;
+  border-radius: var(--radius-xs);
+  background-color: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+
+  /* Yalnızca renk geçişleri. Yükselme, gölge, ölçek YOK. */
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+/* ------------------------------------------------------------------ boyut */
+.c-button--sm {
+  min-block-size: var(--control-sm);
+  padding-inline: var(--space-4);
+  font-size: var(--type-body-s);
+}
+
+.c-button--md {
+  min-block-size: var(--control-md);
+  padding-inline: var(--space-6);
+}
+
+.c-button--lg {
+  min-block-size: var(--control-lg);
+  padding-inline: var(--space-8);
+  font-size: var(--type-body-l);
+}
+
+/* --------------------------------------------------------------- birincil */
+.c-button--primary {
+  background-color: var(--action-primary-bg);
+  border-color: var(--action-primary-bg);
+  color: var(--action-primary-text);
+}
+
+.c-button--primary:hover {
+  background-color: var(--action-primary-bg-hover);
+  border-color: var(--action-primary-bg-hover);
+}
+
+/* --------------------------------------------------------------- ikincil */
+.c-button--secondary {
+  border-color: var(--action-secondary-border);
+  color: var(--text-primary);
+}
+
+.c-button--secondary:hover {
+  border-color: var(--text-primary);
+  background-color: var(--surface-alt);
+}
+
+/* --------------------------------------------------------------- üçüncül
+   Görsel olarak bir bağlantıdır; hiyerarşide buton seviyesidir.
+   Yumuşak köprüler için: "Tüm çalışmaları görün →" */
+.c-button--tertiary {
+  min-block-size: var(--target-min);
+  padding-inline: 0;
+  padding-block: var(--space-3);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.c-button--tertiary:hover {
+  text-decoration-thickness: 2px;
+}
+
+.c-button--tertiary:hover .c-icon--motion {
+  transform: translateX(3px);
+}
+
+/* ---------------------------------------------------------------- durumlar
+   Devre dışı buton mümkünse HİÇ gösterilmez: kullanıcıya yapamayacağı bir şeyi
+   göstermek, onu göstermemekten kötüdür. Bu stil son çare içindir. */
+.c-button:disabled,
+.c-button[aria-disabled="true"] {
+  background-color: var(--action-disabled-bg);
+  border-color: var(--action-disabled-bg);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.c-button:disabled:hover,
+.c-button[aria-disabled="true"]:hover {
+  background-color: var(--action-disabled-bg);
+  border-color: var(--action-disabled-bg);
+}
+
+/* Yükleniyor: metin yerinde kalır (düzen kaymaz), durum ekran okuyucuya
+   aria-busy ile bildirilir. Dönen çark yok — hareket bilgi taşımalı,
+   burada taşıdığı bilgi metinle zaten veriliyor. */
+.c-button[aria-busy="true"] {
+  cursor: progress;
+  color: var(--text-muted);
+}
+
+/* Tam genişlik — yalnızca mobilde ve yalnızca kapanış bölümünde */
+.c-button--block {
+  display: flex;
+  inline-size: 100%;
+}

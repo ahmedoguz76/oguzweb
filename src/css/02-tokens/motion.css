@@ -1,0 +1,37 @@
+/**
+ * 02 · TOKENS — MOTION
+ * ============================================================================
+ * Hareketin tek meşru gerekçesi: durum değişimini bildirmek, ilişki kurmak,
+ * geri bildirim vermek. "Hoş duruyor" gerekçe değildir. (PHASE 06 §16)
+ *
+ * 200ms varsayılan: 100ms altı algılanmaz, 400ms üstü yavaş hissedilir.
+ * ease-out girişlerde kullanılır — göz hızlı başlangıcı "duyarlı",
+ * yumuşak duruşu "pahalı" olarak okur.
+ *
+ * YALNIZCA opacity ve transform animasyonu yapılır. Diğer özellikler düzen
+ * yeniden hesaplaması tetikler; kare düşmesi ve CLS'e yol açar.
+ * (İstisna: akordeon grid-template-rows — gerekçesi accordion.css'te.)
+ */
+
+:root {
+  --duration-instant: 100ms; /* odak halkası */
+  --duration-fast: 150ms;    /* hover, küçük durum değişimi */
+  --duration-base: 200ms;    /* varsayılan */
+  --duration-slow: 320ms;    /* akordeon, mobil menü */
+  --duration-reveal: 500ms;  /* içeriğin ilk belirmesi */
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-linear: linear;
+
+  /* Belirme hareketinin mesafesi. 12px'i geçmez: büyük kayma dikkat çeker,
+     dikkat çekmek amaç değil. */
+  --reveal-distance: 12px;
+}
+
+/**
+ * YASAK (uygulama seviyesinde):
+ *   kaydırmaya bağlı efekt · paralaks · scroll-timeline · sayaç animasyonu
+ *   yükleme perdesi · karusel · otomatik oynatan medya · hover'da yükselme
+ *   layout/paint tetikleyen özellik animasyonu · animasyon kütüphanesi
+ */

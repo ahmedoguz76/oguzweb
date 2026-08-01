@@ -1,0 +1,47 @@
+@layer reset, tokens, base, layout, components, utilities, print;
+@import url("01-reset.css") layer(reset);
+@import url("02-tokens/color.css") layer(tokens);
+@import url("02-tokens/space.css") layer(tokens);
+@import url("02-tokens/type.css") layer(tokens);
+@import url("02-tokens/layout.css") layer(tokens);
+@import url("02-tokens/motion.css") layer(tokens);
+@import url("03-base/fonts.css") layer(base);
+@import url("03-base/document.css") layer(base);
+@import url("03-base/typography.css") layer(base);
+@import url("03-base/media.css") layer(base);
+@import url("04-layout/container.css") layer(layout);
+@import url("04-layout/lane.css") layer(layout);
+@import url("04-layout/section.css") layer(layout);
+@import url("05-components/icon.css") layer(components);
+@import url("05-components/button.css") layer(components);
+@import url("05-components/link.css") layer(components);
+@import url("05-components/image.css") layer(components);
+@import url("05-components/header.css") layer(components);
+@import url("05-components/nav-mobile.css") layer(components);
+@import url("05-components/footer.css") layer(components);
+@import url("05-components/audience.css") layer(components);
+@import url("05-components/contrast.css") layer(components);
+@import url("05-components/scope.css") layer(components);
+@import url("05-components/process.css") layer(components);
+@import url("05-components/cta.css") layer(components);
+@import url("05-components/hero.css") layer(components);
+@import url("05-components/work.css") layer(components);
+@import url("05-components/studio.css") layer(components);
+@import url("05-components/faq.css") layer(components);
+@import url("05-components/page.css") layer(components);
+@import url("06-utilities.css") layer(utilities);
+
+/* ============================================================================
+   K1 · KATMANSIZ KURAL KALDIRILDI
+
+   Buradaki `.c-nav-mobile { visibility:hidden; opacity:0 }` kuralı hiçbir
+   katmanın içinde değildi. Katmansız CSS, TÜM katmanlı CSS'ten önceliklidir;
+   bu yüzden layer(components) içindeki `.c-nav-mobile.is-open` kuralı onu
+   ezemiyordu.
+
+   Sonuç: JS `is-open` sınıfını doğru ekliyordu ama panel görünmüyordu —
+   768px altında ana navigasyon tamamen erişilemezdi.
+
+   Kapalı durumun tanımı zaten nav-mobile.css içinde, doğru katmanda var.
+   Bu satırlar gereksiz değil, ZARARLIYDI.
+   ============================================================================ */

@@ -1,0 +1,149 @@
+<!-- meta {
+  "title": "ODS v1.0 · token doğrulama (geliştirme)",
+  "description": "Geliştirme aracı.",
+  "canonical": "https://oguzweb.com.tr/_dev-tokens",
+  "robots": "noindex, nofollow"
+} -->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <!-- include: head.html -->
+  <style>
+    /* Yalnızca bu geliştirme sayfasına ait yardımcılar.
+       Yayına çıkmadan önce bu dosya silinir (bkz. README · Teslim). */
+    .dev { max-inline-size: 72rem; margin-inline: auto; padding: 3rem 1.5rem 8rem; }
+    .dev-block { margin-block-end: 4rem; }
+    .dev-title { font-family: var(--font-text); font-size: var(--type-label);
+      letter-spacing: var(--track-label); font-weight: var(--weight-semibold);
+      color: var(--text-accent); margin-block-end: 1rem; }
+    .dev-grid { display: grid; gap: 1px; background: var(--border-subtle);
+      border-block: 1px solid var(--border-subtle); }
+    /* minmax(0, 1fr) — `1fr` tek başına min-content'e kilitlenir ve uzun
+       kelimeler sütunu taşırır. 360px'te bu tam olarak gerçekleşti ve
+       Playwright yakaladı. Dar ekranda ayrıca tek sütuna düşer. */
+    .dev-row { display: grid; grid-template-columns: minmax(0, 1fr);
+      gap: 0.5rem; background: var(--surface-page); padding-block: 0.75rem; }
+    @media (min-width: 48rem) {
+      .dev-row { grid-template-columns: 12rem minmax(0, 1fr); gap: 1.5rem; }
+    }
+    .dev-key { font-family: var(--font-text); font-size: var(--type-caption);
+      color: var(--text-muted); font-variant-numeric: tabular-nums; }
+    .dev-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: 1rem; }
+    .dev-chip { block-size: 4rem; border: 1px solid var(--border-subtle); }
+    .dev-bar { background: var(--text-accent); block-size: 0.5rem; }
+    .dev-note { font-size: var(--type-body-s); color: var(--text-muted); max-inline-size: var(--measure-reading); }
+  </style>
+</head>
+<body>
+  <main class="dev" id="icerik">
+
+    <p class="dev-note" style="margin-block-end:3rem">
+      <strong>Geliştirme sayfası.</strong> ODS v1.0 token katmanının görsel
+      doğrulaması. Bu sayfa yayına çıkmaz. Fontlar <code>npm run fonts</code>
+      çalıştırılmadan yüklenmez — yedek fontla görüntülenir.
+    </p>
+
+    <section class="dev-block">
+      <p class="dev-title">Tip skalası · 360px → 1440px akışkan</p>
+      <div class="dev-grid">
+        <div class="dev-row"><span class="dev-key">display-xl · h1</span>
+          <h1>Ölçü şafağı: İğne, çığlık, ğ Ş ı İ</h1></div>
+        <div class="dev-row"><span class="dev-key">display-l · h2</span>
+          <h2>Ölçü şafağı: İğne, çığlık</h2></div>
+        <div class="dev-row"><span class="dev-key">heading-m · h3</span>
+          <h3>Ölçü şafağı: İğne, çığlık</h3></div>
+        <div class="dev-row"><span class="dev-key">heading-s · h4</span>
+          <h4>Ölçü şafağı: İğne, çığlık</h4></div>
+        <div class="dev-row"><span class="dev-key">body-l</span>
+          <p style="font-size:var(--type-body-l);line-height:var(--line-body-l)">Kliniğinize giren hasta ne hissediyorsa, sitenize giren de aynısını hissetmeli.</p></div>
+        <div class="dev-row"><span class="dev-key">body-m · varsayılan</span>
+          <p class="u-measure">Türkçe ortalama kelime uzunluğu İngilizce'den fazladır; bu yüzden ölçü 60–72 karakter bandında tutulur. Bu paragraf o bandı doğrular: satır sonlarına bakın, kelime araları dağılmamalı ve tireleme oluşmamalı.</p></div>
+        <div class="dev-row"><span class="dev-key">body-s</span>
+          <p style="font-size:var(--type-body-s)">Yardımcı metin — künye, açıklama, süre.</p></div>
+        <div class="dev-row"><span class="dev-key">caption / label</span>
+          <p style="font-size:var(--type-label);letter-spacing:var(--track-label);font-weight:var(--weight-semibold);color:var(--text-accent)">Bölüm etiketi</p></div>
+      </div>
+    </section>
+
+    <section class="dev-block">
+      <p class="dev-title">Renk · mürekkep</p>
+      <div class="dev-swatches">
+        <div><div class="dev-chip" style="background:var(--ink-900)"></div><p class="dev-key">ink-900 · 16.4:1</p></div>
+        <div><div class="dev-chip" style="background:var(--ink-700)"></div><p class="dev-key">ink-700 · 9.7:1</p></div>
+        <div><div class="dev-chip" style="background:var(--ink-500)"></div><p class="dev-key">ink-500 · 4.9:1</p></div>
+        <div><div class="dev-chip" style="background:var(--ink-300)"></div><p class="dev-key">ink-300 · dekoratif</p></div>
+        <div><div class="dev-chip" style="background:var(--ink-200)"></div><p class="dev-key">ink-200 · ayraç</p></div>
+        <div><div class="dev-chip" style="background:var(--ink-100)"></div><p class="dev-key">ink-100</p></div>
+      </div>
+    </section>
+
+    <section class="dev-block">
+      <p class="dev-title">Renk · kâğıt ve vurgu</p>
+      <div class="dev-swatches">
+        <div><div class="dev-chip" style="background:var(--paper-000)"></div><p class="dev-key">paper-000</p></div>
+        <div><div class="dev-chip" style="background:var(--paper-100)"></div><p class="dev-key">paper-100 · zemin</p></div>
+        <div><div class="dev-chip" style="background:var(--paper-200)"></div><p class="dev-key">paper-200</p></div>
+        <div><div class="dev-chip" style="background:var(--paper-300)"></div><p class="dev-key">paper-300</p></div>
+        <div><div class="dev-chip" style="background:var(--accent-900)"></div><p class="dev-key">accent-900 · 10.1:1</p></div>
+        <div><div class="dev-chip" style="background:var(--accent-700)"></div><p class="dev-key">accent-700 · hover</p></div>
+      </div>
+    </section>
+
+    <section class="dev-block">
+      <p class="dev-title">Boşluk skalası · 4px tabanı</p>
+      <div class="dev-grid">
+        <div class="dev-row"><span class="dev-key">space-1 · 4px</span><div class="dev-bar" style="inline-size:var(--space-1)"></div></div>
+        <div class="dev-row"><span class="dev-key">space-2 · 8px</span><div class="dev-bar" style="inline-size:var(--space-2)"></div></div>
+        <div class="dev-row"><span class="dev-key">space-4 · 16px</span><div class="dev-bar" style="inline-size:var(--space-4)"></div></div>
+        <div class="dev-row"><span class="dev-key">space-6 · 24px</span><div class="dev-bar" style="inline-size:var(--space-6)"></div></div>
+        <div class="dev-row"><span class="dev-key">space-8 · 32px</span><div class="dev-bar" style="inline-size:var(--space-8)"></div></div>
+        <div class="dev-row"><span class="dev-key">space-12 · 48px</span><div class="dev-bar" style="inline-size:var(--space-12)"></div></div>
+        <div class="dev-row"><span class="dev-key">space-16 · 64px</span><div class="dev-bar" style="inline-size:var(--space-16)"></div></div>
+        <div class="dev-row"><span class="dev-key">space-24 · 96px</span><div class="dev-bar" style="inline-size:var(--space-24)"></div></div>
+        <div class="dev-row"><span class="dev-key">space-40 · 160px</span><div class="dev-bar" style="inline-size:var(--space-40)"></div></div>
+      </div>
+    </section>
+
+    <section class="dev-block">
+      <p class="dev-title">Duyarlı tokenlar · pencereyi yeniden boyutlandırın</p>
+      <div class="dev-grid">
+        <div class="dev-row"><span class="dev-key">--container-pad</span><div class="dev-bar" style="inline-size:var(--container-pad)"></div></div>
+        <div class="dev-row"><span class="dev-key">--space-section</span><div class="dev-bar" style="inline-size:var(--space-section)"></div></div>
+        <div class="dev-row"><span class="dev-key">--grid-gutter</span><div class="dev-bar" style="inline-size:var(--grid-gutter)"></div></div>
+        <div class="dev-row"><span class="dev-key">--header-height</span><div class="dev-bar" style="inline-size:var(--header-height)"></div></div>
+      </div>
+      <p class="dev-note" style="margin-block-start:1rem">
+        Oran kuralı: <code>--space-section ≥ 2.5 × --space-section-inner-max</code>.
+        Her breakpoint'te sağlanmalı.
+      </p>
+    </section>
+
+    <section class="dev-block">
+      <p class="dev-title">Odak halkası ve bağlantı · Tab tuşuyla gezin</p>
+      <p class="u-measure">
+        Bu bir <a href="#icerik">metin içi bağlantıdır</a> ve her zaman altı
+        çizilidir. Üzerine gelindiğinde çizgi kalınlaşır. Klavyeyle
+        odaklandığında 2px vurgu renginde halka görünür — hiçbir yerde
+        kaldırılmaz.
+      </p>
+      <p style="margin-block-start:1.5rem">
+        <button type="button" style="border:1px solid var(--border-strong);padding:0.75rem 1.5rem;border-radius:var(--radius-xs)">
+          Odak testi
+        </button>
+      </p>
+    </section>
+
+    <section class="dev-block">
+      <p class="dev-title">Türkçe karakter denetimi</p>
+      <p style="font-family:var(--font-display);font-size:var(--type-heading-m)">
+        ÇĞİÖŞÜ · çğıöşü · İstanbul, Iğdır, Şışlı, Çağrı, Öğüt, Üsküdar
+      </p>
+      <p class="dev-note" style="margin-block-start:0.5rem">
+        Noktalı büyük <strong>İ</strong> ve noktasız küçük <strong>ı</strong>
+        doğru çizilmeli. Yedek fontla bakıyorsanız bu test geçerli değildir.
+      </p>
+    </section>
+
+  </main>
+</body>
+</html>

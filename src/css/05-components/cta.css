@@ -1,0 +1,80 @@
+/**
+ * 05 · COMPONENTS — CTA
+ * ============================================================================
+ * İki tür CTA bloğu:
+ *
+ *   inline   bölüm sonu yumuşak köprü — satış değil, besleme.
+ *            Eşiği yok: tıklamayan ziyaretçi akışa devam eder.
+ *
+ *   closing  sayfanın ana dönüşüm noktası. Sayfada bir kez.
+ *
+ * SOL HİZALAMA KARARI
+ * Sayfa boyunca tek eksene hizalanmış editöryel bir yapının sonunda ortalanmış
+ * bir blok, sunum slaytı kodu taşır ve hizalama disiplinini son anda çürütür.
+ * Kapanışın ayrıcalığı ortalama ile değil, sayfadaki EN BÜYÜK BOŞLUKLA ve tam
+ * genişlik ayraçla verilir. (PHASE 07 · Bölüm 08)
+ *
+ * FİYAT KARARININ TELAFİSİ
+ * Fiyat gösterilmeyen bir sitede terkin en yaygın nedeni, "fiyat sormak için
+ * mesaj atmak zorunda kalmak" utancıdır. Kapanıştaki güvence satırı, sayfadaki
+ * en yüksek dönüşüm etkili tek cümledir — bir buton renginden kat kat fazla iş
+ * yapar.
+ *
+ * Kıtlık taktiği YOK: geri sayım, kontenjan, "son 3 yer" premium algıyı anında
+ * yok eder.
+ */
+
+/* Ortalama YOK — beyan edilmiş bir karar, varsayılana bırakılmış değil.
+   Sayfa boyunca tek eksene hizalanmış editöryel bir yapının sonunda
+   ortalanmış blok, hizalama disiplinini son anda çürütür. */
+.c-cta {
+  text-align: start;
+}
+
+.c-cta__lead {
+  font-size: var(--type-body-l);
+  line-height: var(--line-body-l);
+  color: var(--text-secondary);
+  max-inline-size: var(--measure-reading);
+  padding-block-end: var(--space-8);
+}
+
+.c-cta__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+/* Güvence ve yanıt süresi — butonun hemen altında, sessiz. */
+.c-cta__assurance {
+  padding-block-start: var(--space-4);
+  font-size: var(--type-body-s);
+  line-height: var(--line-body-s);
+  color: var(--text-muted);
+  max-inline-size: var(--measure-reading);
+}
+
+.c-cta__meta {
+  padding-block-start: var(--space-2);
+  font-size: var(--type-caption);
+  color: var(--text-muted);
+}
+
+.c-cta__alt {
+  padding-block-start: var(--space-8);
+}
+
+/* Kapanış bloğu — tam genişlik ayraç "son" işaretidir. */
+.c-cta--closing {
+  border-block-start: var(--border-hairline) solid var(--border-subtle);
+  padding-block-start: var(--space-16);
+}
+
+@media (min-width: 48rem) { /* 768px */
+  .c-cta__actions {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-6);
+  }
+}

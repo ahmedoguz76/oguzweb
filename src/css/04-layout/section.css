@@ -1,0 +1,100 @@
+/**
+ * 04 · LAYOUT — SECTION
+ * ============================================================================
+ * Bölümler ayraç çizgisiyle DEĞİL, yalnızca boşlukla ayrılır.
+ * Ayraç çizgisi, dekoratif şekil, dalga, gradient geçiş, bölüm zemini — yok.
+ * Ayrım tek bir mekanizmayla kurulur: BOŞLUK MİKTARI. (PHASE 04 §3)
+ *
+ * ORAN KURALI — bu sistemin en önemli tek kuralı
+ * ----------------------------------------------------------------------------
+ *   bölümler arası boşluk >= 2.5 × bölüm içi en büyük boşluk
+ *
+ * Oran 2.5'in altına düşerse bölümler birbirine karışır ve sayfa "uzun bir
+ * metin" gibi okunur — editöryel yapı çöker. Değerler space.css'te
+ * breakpoint bazında tanımlı; denetimi tools/layout-check.js yapar.
+ */
+
+/**
+ * Boşluk ALTA verilir (§21/D1). Böylece:
+ *   · çakışan margin sorunu oluşmaz
+ *   · her bölüm kendinden sonrasını iter, öncesini değil
+ *   · son bölümün alt boşluğu footer'dan önceki nefesi sağlar
+ *
+ * padding kullanılır, margin değil: padding çakışmaz ve bölümün kendi
+ * zemininin parçasıdır.
+ */
+.l-section {
+  padding-block-end: var(--space-section);
+}
+
+/**
+ * Kapanış bölümü — sayfadaki en büyük tek boşluk.
+ * Kapanışın ayrıcalığı ORTALAMA ile değil boşlukla verilir: sayfa boyunca
+ * tek eksene hizalanmış bir yapının sonunda ortalanmış bir blok, sunum
+ * slaytı kodu taşır ve dokuz bölümlük hizalama disiplinini son anda
+ * çürütür. (PHASE 07 §08)
+ */
+.l-section--closing {
+  padding-block-start: var(--space-section-closing);
+}
+
+/* Bölüm başlığı bloğu: etiket → başlık → içerik */
+.l-section__label {
+  display: block;
+  font-family: var(--font-text);
+  font-size: var(--type-label);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--track-label);
+  color: var(--text-accent);
+  margin-block-end: var(--space-4);
+}
+
+/* Başlık ile bölüm içeriği arası — bölüm içi EN BÜYÜK boşluk.
+   Oran kuralının paydası budur. */
+.l-section__body {
+  padding-block-start: var(--space-section-inner-max);
+}
+
+/**
+ * Yatay ayraç.
+ * Hairline YAPISALDIR: bilgi grubu ayırır, kutu çizmez. Bölüm ayırmak için
+ * kullanılmaz — o iş boşluğundur. Bölüm İÇİNDEKİ satırları ayırır
+ * (sektör listesi, süreç aşamaları, SSS).
+ *
+ * Ayraç şeridinin tam genişliğinde uzanır, içerik genişliğinde kısaltılmaz
+ * — editöryel kural.
+ */
+.l-divider {
+  border-block-start: var(--border-hairline) solid var(--border-subtle);
+}
+
+/* Ayraçla ayrılmış satır listesi: her satırın üstünde çizgi, sonuncunun
+   altında da. Satır iç boşluğu simetriktir çünkü çizgiler arası ritim
+   görsel olarak eşit olmalı. */
+.l-rows > * {
+  border-block-start: var(--border-hairline) solid var(--border-subtle);
+  padding-block: var(--space-8);
+}
+
+.l-rows > *:last-child {
+  border-block-end: var(--border-hairline) solid var(--border-subtle);
+}
+
+@media (min-width: 64rem) { /* 1024px */
+  .l-rows > * {
+    padding-block: var(--space-8);
+  }
+}
+
+/* Bölüm içi alt bloklar.
+   Inline stil KULLANILMAZ: katı bir CSP'yi imkânsız kılar ve token
+   disiplinini denetim dışına çıkarır (audit yalnızca CSS'i tarar).
+   Bölüm içi en büyük boşluk budur — oran kuralının paydası. */
+.l-section__sub {
+  padding-block-start: var(--space-section-inner-max);
+}
+
+/* Yumuşak köprü öncesi nefes — bölüm içi, oran paydasını aşmaz. */
+.l-section__bridge {
+  padding-block-start: var(--space-8);
+}

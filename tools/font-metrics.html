@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>OğuzWeb — Yedek font metrik ölçümü</title>
+<style>
+  body { font: 16px/1.6 ui-monospace, monospace; max-width: 60rem; margin: 3rem auto; padding: 0 1.5rem; color: #16130F; background: #FBF9F5; }
+  h1 { font-size: 1.25rem; }
+  p  { max-width: 46rem; }
+  pre { background: #F4F0E9; padding: 1rem; overflow-x: auto; border-left: 2px solid #1B3A31; }
+  table { border-collapse: collapse; margin: 1.5rem 0; font-size: 0.875rem; }
+  td, th { border-bottom: 1px solid #D6CFC4; padding: 0.4rem 1rem 0.4rem 0; text-align: left; }
+  .warn { color: #8C2F22; }
+  .ok { color: #2E5D3A; }
+
+  /* Ölçüm için gerçek fontlar — src/fonts/ içindeki dosyalara göreli yol */
+  @font-face { font-family: "Measure Serif"; src: url("../src/fonts/source-serif-4-latin-ext.woff2") format("woff2"); font-weight: 300 700; }
+  @font-face { font-family: "Measure Sans";  src: url("../src/fonts/source-sans-3-latin-ext.woff2")  format("woff2"); font-weight: 300 700; }
+</style>
+</head>
+<body>
+
+<h1>Yedek font metrik ölçümü</h1>
+
+<p>
+  Bu araç, gerçek font dosyaları ile yedek sistem fontları arasındaki boyut farkını
+  ölçer ve <code>size-adjust</code> / <code>ascent-override</code> /
+  <code>descent-override</code> değerlerini hesaplar. Bu değerler
+  <strong>CLS ≤ 0.02</strong> hedefinin anahtarıdır: doğru ayarlandığında font takası
+  sırasında hiçbir düzen kayması olmaz.
+</p>
+
+<p>
+  Kullanım: <code>node tools/fonts.js</code> ile fontları indirin, sonra bu dosyayı
+  yerel bir sunucu üzerinden açın (dosya protokolünde font yüklenmez):
+  <code>npx serve .</code> veya <code>python3 -m http.server</code>.
+</p>
+
+<div id="out">Ölçülüyor…</div>
+
+<script type="module">
+const PAIRS = [
+  {
+    label: "Source Serif 4",
+    real: "Measure Serif",
+    fallbacks: ["Georgia", "Times New Roman", "serif"],
+    cssName: "Source Serif 4 Fallback",
+  },
+  {
+    label: "Source Sans 3",
+    real: "Measure Sans",
+    fallbacks: ["Arial", "Helvetica", "sans-serif"],
+    cssName: "Source Sans 3 Fallback",
+  },
+];
+
+/* Türkçe karakterleri de içeren temsili örnek — ölçüm gerçek metne yakın olsun */
+const SAMPLE =
+  "İşinizi iyi yapıyorsunuz. Ağırlıklı olarak klinikler, hekimler ve " +
+  "estetik merkezleriyle çalışıyorum. ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789";
+
+const SIZE = 100;
+
+function advanceWidth(family) {
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  ctx.font = `${SIZE}px "${family}"`;
+  return ctx.measureText(SAMPLE).width;
+}
+
+function verticalMetrics(family) {
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  ctx.font = `${SIZE}px "${family}"`;
+  const m = ctx.measureText("Hxşğİ");
+  return {
+    ascent: m.fontBoundingBoxAscent ?? m.actualBoundingBoxAscent,
+    descent: m.fontBoundingBoxDescent ?? m.actualBoundingBoxDescent,
+  };
+}
+
+async function run() {
+  try {
+    await document.fonts.load(`${SIZE}px "Measure Serif"`, SAMPLE);
+    await document.fonts.load(`${SIZE}px "Measure Sans"`, SAMPLE);
+    await document.fonts.ready;
+  } catch (e) { /* yoksa aşağıdaki kontrol yakalar */ }
+
+  const out = [];
+
+  for (const pair of PAIRS) {
+    const realWidth = advanceWidth(pair.real);
+    const probe = advanceWidth("monospace");
+    if (!realWidth || Math.abs(realWidth - probe) < 0.5) {
+      out.push(
+        `<p class="warn">✗ <strong>${pair.label}</strong> yüklenemedi. ` +
+        `src/fonts/ içinde woff2 dosyası var mı? Sayfayı yerel sunucudan açtınız mı?</p>`
+      );
+      continue;
+    }
+
+    const realV = verticalMetrics(pair.real);
+    const rows = [];
+    let best = null;
+
+    for (const fb of pair.fallbacks) {
+      const fbWidth = advanceWidth(fb);
+      const sizeAdjust = (realWidth / fbWidth) * 100;
+      const fbV = verticalMetrics(fb);
+      const scaled = SIZE * (sizeAdjust / 100);
+      const ascentOverride = (realV.ascent / scaled) * 100;
+      const descentOverride = (realV.descent / scaled) * 100;
+
+      rows.push(
+        `<tr><td>${fb}</td><td>${sizeAdjust.toFixed(2)}%</td>` +
+        `<td>${ascentOverride.toFixed(2)}%</td><td>${descentOverride.toFixed(2)}%</td></tr>`
+      );
+      if (!best) best = { fb, sizeAdjust, ascentOverride, descentOverride };
+    }
+
+    out.push(`
+      <h2>${pair.label}</h2>
+      <table>
+        <tr><th>Yedek</th><th>size-adjust</th><th>ascent-override</th><th>descent-override</th></tr>
+        ${rows.join("")}
+      </table>
+      <p class="ok">Aşağıdaki bloğu <code>src/css/03-base/fonts.css</code> içindeki
+      ilgili yedek tanımıyla değiştirin:</p>
+      <pre>@font-face {
+  font-family: "${pair.cssName}";
+  src: local("${best.fb}");
+  size-adjust: ${best.sizeAdjust.toFixed(2)}%;
+  ascent-override: ${best.ascentOverride.toFixed(2)}%;
+  descent-override: ${best.descentOverride.toFixed(2)}%;
+  line-gap-override: 0%;
+}</pre>
+    `);
+  }
+
+  document.getElementById("out").innerHTML = out.join("");
+}
+
+run();
+</script>
+
+</body>
+</html>

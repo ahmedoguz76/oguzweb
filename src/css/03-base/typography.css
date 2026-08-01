@@ -1,0 +1,133 @@
+/**
+ * 03 · BASE — TYPOGRAPHY
+ * ============================================================================
+ * Element seviyesi tipografi. Bileşene özel tipografi components katmanında.
+ *
+ * Kural: boşluk YALNIZCA alta verilir (PHASE 06 §21/D1). Bu dosyada
+ * margin-block-start kullanılmaz.
+ */
+
+/* ------------------------------------------------------------- başlıklar */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  /* Başlıklarda satır kırılması dengelenir: tek kelimelik son satır olmaz */
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--type-display-xl);
+  font-weight: var(--weight-regular);
+  line-height: var(--line-display-xl);
+  letter-spacing: var(--track-display-xl);
+}
+
+h2 {
+  font-size: var(--type-display-l);
+  font-weight: var(--weight-regular);
+  line-height: var(--line-display-l);
+  letter-spacing: var(--track-display-l);
+}
+
+h3 {
+  font-size: var(--type-heading-m);
+  font-weight: var(--weight-medium);
+  line-height: var(--line-heading-m);
+  letter-spacing: var(--track-heading-m);
+}
+
+h4 {
+  font-size: var(--type-heading-s);
+  font-weight: var(--weight-medium);
+  line-height: var(--line-heading-s);
+}
+
+/* ------------------------------------------------------------ paragraflar */
+p {
+  /* Son satırda tek kelime (dul) bırakmaz */
+  text-wrap: pretty;
+}
+
+/* `p + p { margin-block-start }` yerine `:has()` ile ALT boşluk:
+   davranış birebir aynı (yalnızca ardışık paragraflar arasında boşluk,
+   son paragraftan sonra artık boşluk yok) ama §21/D1 ihlal edilmiyor.
+   Boşluğun tek yönlü akması, çakışan margin sorununu kökten önler. */
+p:has(+ p) {
+  margin-block-end: var(--space-4);
+}
+
+/* --------------------------------------------------------------- vurgular
+   Vurgu AĞIRLIKLA yapılır, renkle değil: renkle vurgu renk körlüğünde
+   kaybolur. (PHASE 06 §7 / P7) */
+strong,
+b {
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+small {
+  font-size: var(--type-body-s);
+}
+
+/* ------------------------------------------------------------- listeler */
+ul,
+ol {
+  padding-inline-start: 1.25em;
+}
+
+li:has(+ li) {
+  margin-block-end: var(--space-2);
+}
+
+/* ---------------------------------------------------------- bağlantılar
+   Metin içi bağlantı HER ZAMAN altı çizilidir: renk tek başına bağlantı
+   sinyali değildir. Alt çizgi web'in en zamansız kuralı.
+
+   offset 3px: varsayılan offset serif harflerin alt çıkıntılarını
+   (g, y, p, ş, ç) keser ve amatör görünür. */
+a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-thickness var(--duration-instant) var(--ease-out);
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* ------------------------------------------------------------- ayraçlar
+   Hairline YAPISALDIR: bilgi grubu ayırır. Çerçeve değildir. */
+hr {
+  block-size: var(--border-hairline);
+  background-color: var(--border-subtle);
+  margin-block-end: var(--space-8);
+}
+
+/* --------------------------------------------------------------- rakamlar
+   Süreç numaraları, süreler ve künye satırları hizalı kalsın. */
+time,
+[data-numeric] {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/**
+ * TÜRKÇE KURALLARI (PHASE 06 §7)
+ * ----------------------------------------------------------------------------
+ *   · Tümü büyük harf KULLANILMAZ — i→İ dönüşümü teknik olarak bozulur,
+ *     ayrıca bağırma etkisi premium tonla çelişir.
+ *   · İki yana yaslama (justify) YASAK — tirelemesiz dizgide kelime araları
+ *     dağılır.
+ *   · Otomatik tireleme KAPALI (01-reset.css).
+ *   · Satır uzunluğu 60–72 karakter (--measure-reading).
+ */

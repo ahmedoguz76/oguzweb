@@ -1,0 +1,77 @@
+/**
+ * 04 · LAYOUT — GRID & LANE
+ * ============================================================================
+ * 12 sütunluk KATI taban ızgara + üzerine editöryel ŞERİT sistemi.
+ *
+ * 12 seçimi: 2, 3, 4 ve 6'ya bölünür — mümkün olan en esnek bölünme.
+ * Ama Yön A içeriğin 12 sütunu doldurmasını istemez. Bu yüzden ızgara taban
+ * olarak kalır, içerik tanımlı şeritlere yerleşir. Izgara GÖRÜNMEZ ama
+ * hissedilir: her bölüm aynı eksenlere oturur ve bu tekrar, farkında
+ * olunmadan "burada bir düzen var" mesajı üretir. (PHASE 06 §3)
+ *
+ * ŞERİT İNDİRGEME
+ * ----------------------------------------------------------------------------
+ * Dar ekranda şerit ORANI korunursa okuma genişliği çöker. Bu yüzden şeritler
+ * küçüldükçe sütun sayısını ARTIRIR:
+ *
+ *   şerit      >=1280   1024–1279   768–1023   <768
+ *   reading      6/12       8/12       10/12    12/12
+ *   standard     8/12      10/12       12/12    12/12
+ *   wide        10/12      12/12       12/12    12/12
+ *   full        12/12      12/12       12/12    12/12
+ *
+ * (PHASE 07 §0)
+ */
+
+.l-grid {
+  display: grid;
+  /* minmax(0, 1fr) — `1fr` tek başına min-content'e kilitlenir ve uzun
+     Türkçe kelimeler ya da geniş görseller sütunu taşırır. Yatay taşmanın
+     en yaygın gizli nedeni budur; burada yapısal olarak kapatılıyor. */
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+}
+
+/* Izgara çocuklarının kendi içeriklerini taşırmasını engeller */
+.l-grid > * {
+  min-inline-size: 0;
+}
+
+/* ---------------------------------------------------------------- şeritler
+   Taban: hepsi tam genişlik. Genişledikçe daralırlar. */
+.l-lane {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 48rem) { /* 768px */
+  .l-lane--reading { grid-column: 1 / span 10; }
+}
+
+@media (min-width: 64rem) { /* 1024px */
+  .l-lane--reading { grid-column: 1 / span 8; }
+  .l-lane--standard { grid-column: 1 / span 10; }
+}
+
+@media (min-width: 80rem) { /* 1280px */
+  .l-lane--reading { grid-column: 1 / span 6; }
+  .l-lane--standard { grid-column: 1 / span 8; }
+  .l-lane--wide { grid-column: 1 / span 10; }
+}
+
+/**
+ * İKİNCİ EKSEN (A2)
+ * ----------------------------------------------------------------------------
+ * Yalnızca >=1280px'te etkin. 1280 altında A1'e düşer.
+ *
+ * Gerekçe: 1024px'te 2 sütunluk offset ≈ 90px eder ve bu, editöryel bir
+ * karar gibi değil KAZARA gibi görünür. Asimetri ancak yeterli genişlikte
+ * ritim üretir.
+ *
+ * Sayfada en fazla İKİ eksen bulunur (§21/H2). Üçüncü eksen, asimetriyi
+ * ritim olmaktan çıkarıp rastlantı gösterir.
+ */
+@media (min-width: 80rem) {
+  .l-grid--axis-2 > .l-lane {
+    grid-column-start: 3;
+  }
+}

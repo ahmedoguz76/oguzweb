@@ -1,0 +1,57 @@
+/**
+ * 06 · UTILITIES
+ * ============================================================================
+ * Utility katmanı bilinçli olarak KÜÇÜK tutulur. Bu bir utility-first sistem
+ * değil; buradaki sınıflar bileşenlerin yerini almaz, yalnızca bileşenlerin
+ * ifade edemeyeceği tek seferlik davranışları taşır.
+ *
+ * Yeni utility eklemeden önce sorulacak soru:
+ * "Bu, bir bileşenin eksik varyantı olabilir mi?" Cevap evetse utility yazılmaz.
+ */
+
+/* Ekran okuyucuya görünür, göze görünmez.
+   (Tanımı 03-base/document.css içinde; burada odaklanınca görünür hali) */
+.u-visually-hidden--focusable:focus,
+.u-visually-hidden--focusable:focus-visible {
+  position: static;
+  inline-size: auto;
+  block-size: auto;
+  margin: 0;
+  overflow: visible;
+  clip-path: none;
+  white-space: normal;
+}
+
+/* Mobil menü açıkken arka plan kaydırmasını kilitler (mobile-nav.js) */
+.u-no-scroll {
+  overflow: hidden;
+  /* iOS Safari'de overflow:hidden tek başına yetmez */
+  touch-action: none;
+}
+
+/* Ölçü sınırlayıcılar — uzun metin bloklarında okunabilirlik */
+.u-measure { max-inline-size: var(--measure-reading); }
+.u-measure-lead { max-inline-size: var(--measure-lead); }
+
+/* Hareket azaltma tercih edilmediğinde belirme animasyonu için başlangıç
+   durumu. Sınıf JS tarafından eklenir — JS yüklenmezse içerik HİÇBİR ZAMAN
+   şeffaf kalmaz. "Boş sayfa" başarısızlığı bu sayede imkânsızdır. */
+.u-reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+  transition:
+    opacity var(--duration-reveal) var(--ease-out),
+    transform var(--duration-reveal) var(--ease-out);
+}
+
+.u-reveal.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .u-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

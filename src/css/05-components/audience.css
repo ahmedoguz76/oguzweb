@@ -1,0 +1,54 @@
+/**
+ * 05 · COMPONENTS — AUDIENCE
+ * ============================================================================
+ * Sözlük/dizin düzeni: sektör adı solda, o sektöre özgü problem cümlesi sağda.
+ *
+ * Üç iş birden yapar: kart kullanmadan gruplama üretir, editöryel referans
+ * yayını çağrışımı yapar (künye, indeks), tarama hızını maksimize eder.
+ *
+ * Sektör adı TEK BAŞINA yeterli değildir. Tanınma isimden değil DERTTEN
+ * doğar: "Diş klinikleri" yazmak tanınma üretmez, kliniğin gerçek problemini
+ * yazmak üretir. (PHASE 03 · Bölüm 03)
+ *
+ * Satır yapısı l-rows'tan gelir — bileşen kendi ayracını tanımlamaz.
+ */
+
+/* Tarayıcı varsayılanı dd'ye 40px iç girinti verir — sıfırlanmazsa
+   editöryel eksen bozulur. */
+.c-audience,
+.c-audience dd {
+  margin: 0;
+}
+
+.c-audience__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-2);
+}
+
+.c-audience__name {
+  font-family: var(--font-display);
+  font-size: var(--type-heading-s);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+}
+
+.c-audience__problem {
+  font-size: var(--type-body-m);
+  line-height: var(--line-body-m);
+  color: var(--text-secondary);
+}
+
+@media (min-width: 48rem) { /* 768px */
+  /* Tarayıcı varsayılanı dd'ye 40px iç girinti verir — sıfırlanmazsa
+   editöryel eksen bozulur. */
+.c-audience,
+.c-audience dd {
+  margin: 0;
+}
+
+.c-audience__row {
+    grid-template-columns: 4fr 7fr;
+    gap: var(--space-8);
+  }
+}

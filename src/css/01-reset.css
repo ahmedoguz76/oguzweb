@@ -1,0 +1,123 @@
+/**
+ * 01 · RESET
+ * ============================================================================
+ * Normalize değil, reset. Amaç tarayıcı varsayılanlarını eşitlemek değil,
+ * sistemin varsayımlarını kurmaktır.
+ *
+ * Kural: bu dosyada hiçbir görsel karar yok. Renk, boyut, font burada
+ * belirlenmez — yalnızca davranış sıfırlanır.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Boşluk aşağı akar: hiçbir öğe kendi üst boşluğunu vermez.
+   (PHASE 06 §21/D1 — çakışan margin sorununu kökten önler) */
+* {
+  margin-block-start: 0;
+}
+
+html,
+body,
+h1, h2, h3, h4, h5, h6,
+p, figure, blockquote, dl, dd,
+ul, ol {
+  margin: 0;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+  padding: 0;
+}
+
+html {
+  /* iOS'ta yatay çevirmede metnin kendiliğinden büyümesini engeller */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  tab-size: 2;
+}
+
+body {
+  min-height: 100svh;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Türkçe: otomatik tireleme tarayıcılarda hece kurallarını güvenilir
+   uygulamıyor; kapalı tutulur. (PHASE 06 §7) */
+* {
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
+/* Uzun Türkçe kelimeler dar sütunlarda taşmasın */
+p, li, dd, dt, figcaption, blockquote, td, th, label {
+  overflow-wrap: break-word;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+hr {
+  border: 0;
+}
+
+/* Odak halkası base katmanında tanımlanır; burada yalnızca tarayıcı
+   varsayılanı temizlenir — :focus-visible her zaman görünür kalır. */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Kullanıcı hareket azaltma istiyorsa: tüm animasyon ve geçişler etkisiz.
+   İşlev kaybı olmaz — yalnızca hareket kalkar. (PHASE 06 §16) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

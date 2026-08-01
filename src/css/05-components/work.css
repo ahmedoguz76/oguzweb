@@ -1,0 +1,36 @@
+.c-work { display: grid; gap: var(--space-16); }
+.c-work__item { display: grid; gap: var(--space-8); align-items: center; padding-block-end: var(--space-12); border-block-end: var(--border-hairline) solid var(--border-subtle); }
+.c-work__media { position: relative; display: block; min-block-size: 24rem; padding: var(--space-5); overflow: hidden; border: var(--border-hairline) solid var(--border-subtle); background: var(--surface-alt); }
+.c-work__desktop { inline-size: 94%; margin-inline: auto; border: var(--border-hairline) solid var(--border-subtle); }
+.c-work__mobile { position: absolute; inline-size: 24%; max-inline-size: 8rem; inset-inline-end: 4%; inset-block-end: 4%; border: .35rem solid var(--surface-page); border-radius: var(--radius-xs); }
+.c-work__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); color: var(--text-muted); font-size: var(--type-label); letter-spacing: var(--track-label); margin-block-end: var(--space-3); }
+.c-work__desc { color: var(--text-secondary); max-inline-size: var(--measure-lead); margin-block-end: var(--space-5); }
+.c-work__tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-block-end: var(--space-6); }
+.c-work__tags li { padding: .45rem .75rem; border: var(--border-hairline) solid var(--border-subtle); color: var(--text-secondary); font-size: var(--type-body-s); }
+@media (min-width: 48rem) {
+  .c-work__item { grid-template-columns: minmax(0, 1.25fr) minmax(18rem, .75fr); gap: var(--space-12); }
+  .c-work__item:nth-child(even) .c-work__media { grid-column: 2; grid-row: 1; }
+}
+
+/* Yapılan çalışma satırı.
+   Uydurma sonuç veya müşteri verisi YOK — yalnızca gerçekten yapılan işin
+   tarifi. Sahte sayı, yakalandığında tüm güveni siler; doğrulanabilir kapsam
+   ise sessizce yetkinlik gösterir. */
+.c-work__work {
+  border-block-start: var(--border-hairline) solid var(--border-subtle);
+  padding-block-start: var(--space-4);
+  margin-block-end: var(--space-6);
+  max-inline-size: var(--measure-lead);
+  color: var(--text-secondary);
+  font-size: var(--type-body-s);
+  line-height: var(--line-body-s);
+}
+
+.c-work__work span {
+  display: block;
+  padding-block-end: var(--space-1);
+  color: var(--text-accent);
+  font-size: var(--type-label);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--track-label);
+}

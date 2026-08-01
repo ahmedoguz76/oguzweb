@@ -1,0 +1,105 @@
+/**
+ * 05 · COMPONENTS — STUDIO
+ * ============================================================================
+ * "Bu gerçek bir yapı mı?" şüphesini kapatır. Anonimlik güvenin en hızlı
+ * katilidir.
+ *
+ * EN HASSAS DENGE: fazla kişiselleşirse freelancer, fazla kurumsallaşırsa
+ * sahte olur. Kural: isim ve prensipler var, HİKÂYE YOK. Kariyer anlatımı,
+ * motivasyon, "çocukluğumdan beri" yok. Marka anlatımı üçüncü şahıs; tekil
+ * anlatım yalnızca imza cümlesinde.
+ *
+ * Müşteri yorumu envanteri henüz oluşmadığı için güven yükü buraya biniyor:
+ * üçüncü kişi övgüsü yerine DOĞRULANABİLİR ÇALIŞMA PRENSİPLERİ.
+ */
+
+.c-studio {
+  display: grid;
+  gap: var(--space-12);
+}
+
+.c-studio__intro {
+  max-inline-size: var(--measure-reading);
+}
+
+.c-studio__intro p {
+  color: var(--text-secondary);
+  font-size: var(--type-body-l);
+  line-height: var(--line-body-l);
+}
+
+/* İmza cümlesi — sitedeki tek tekil anlatım. Aksan rengindeki dikey çizgi
+   onu çevresinden ayırır; kutu veya zemin kullanılmaz. */
+.c-studio__signature {
+  border-inline-start: var(--border-strong-width) solid var(--action-accent);
+  padding-inline-start: var(--space-4);
+}
+
+/* Boşluk aşağı akar (§21/D1): imza öncesi nefes, kendinden ÖNCEKİ
+   paragrafın alt boşluğundan gelir. */
+.c-studio__intro p:first-child {
+  margin-block-end: var(--space-6);
+}
+
+.c-studio__signature {
+  margin-block-end: var(--space-6);
+}
+
+.c-studio__person {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.c-studio__name {
+  font-family: var(--font-display);
+  font-size: var(--type-heading-s);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+}
+
+.c-studio__place {
+  font-size: var(--type-caption);
+  color: var(--text-muted);
+}
+
+/* Çalışma prensipleri — kart değil, hairline ile ayrılmış satırlar. */
+.c-studio__facts {
+  display: grid;
+  gap: var(--space-8);
+  margin: 0;
+}
+
+.c-studio__fact {
+  border-block-start: var(--border-hairline) solid var(--border-subtle);
+  padding-block-start: var(--space-4);
+}
+
+.c-studio__fact dt {
+  font-family: var(--font-display);
+  font-size: var(--type-heading-s);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+  margin-block-end: var(--space-2);
+}
+
+.c-studio__fact dd {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--type-body-s);
+  line-height: var(--line-body-s);
+}
+
+@media (min-width: 48rem) {
+  .c-studio__facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-8) var(--space-12);
+  }
+}
+
+@media (min-width: 64rem) {
+  .c-studio {
+    grid-template-columns: 5fr 6fr;
+    gap: var(--space-16);
+    align-items: start;
+  }
+}

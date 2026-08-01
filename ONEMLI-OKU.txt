@@ -1,0 +1,11 @@
+OĞUZWEB SİTESİNİ DOĞRU AÇMA
+
+1) ZIP dosyasını tamamen klasöre çıkarın.
+2) src/pages/index.html dosyasını açmayın. Bu dosya kaynak dosyadır ve CSS tek başına yüklenmez.
+3) Hızlı önizleme için SITEYI-AC.html dosyasına çift tıklayın.
+4) Geliştirme yapmak için VS Code terminalinde npm run dev çalıştırın ve http://localhost:4173 adresini açın.
+5) Yayınlanacak klasör dist klasörüdür.
+
+İletişim:
+E-posta: oguzdesigntr@outlook.com
+Telefon / WhatsApp: 0505 043 27 16

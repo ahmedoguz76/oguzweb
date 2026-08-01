@@ -1,0 +1,26 @@
+.c-faq { border-block-start: var(--border-hairline) solid var(--border-subtle); }
+.c-faq__item { border-block-end: var(--border-hairline) solid var(--border-subtle); }
+.c-faq__button {
+  inline-size: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-6);
+  align-items: center;
+  min-block-size: var(--control-lg);
+  padding: var(--space-5) 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-primary);
+  text-align: start;
+  font-family: var(--font-display);
+  font-size: var(--type-heading-s);
+}
+/* K4 · --motion-duration-fast / --motion-ease-standard tanımlı değildi;
+   geçiş tamamen düşüyordu. Doğru adlar: --duration-* / --ease-*. */
+.c-faq__icon { flex: none; transition: transform var(--duration-fast) var(--ease-in-out); }
+.c-faq__button[aria-expanded="true"] .c-faq__icon { transform: rotate(45deg); }
+/* K4 · Aynı sorun: akordeon ani sıçrayarak açılıyordu. */
+.c-faq__panel { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows var(--duration-slow) var(--ease-in-out), visibility var(--duration-slow) var(--ease-in-out); }
+.c-faq__panel[data-open="true"] { grid-template-rows: 1fr; visibility: visible; }
+.c-faq__panel-inner { overflow: hidden; }
+.c-faq__panel p { max-inline-size: var(--measure-reading); color: var(--text-secondary); padding-block-end: var(--space-6); }

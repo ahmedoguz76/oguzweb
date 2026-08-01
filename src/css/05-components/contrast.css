@@ -1,0 +1,65 @@
+/**
+ * 05 · COMPONENTS — CONTRAST
+ * ============================================================================
+ * "Çoğu sitede" / "Burada" karşıtlığı.
+ *
+ * Karşıtlık düz övgüden ölçülebilir biçimde hızlı okunur: ziyaretçi kendi
+ * mevcut durumunu sol sütunda tanır ve sağ sütuna geçmek ister. Sayfadaki en
+ * yüksek terk riskli metin bloğunu okunabilir kılan yapı budur.
+ *
+ * TON: "yaygın yaklaşım" veya "diğerleri" denmez. "Çoğu sitede" nötrdür —
+ * rakibi değil DURUMU tarif eder. Premium marka rakip kötülemez.
+ * (PHASE 02 · sessiz iddia)
+ *
+ * Kazanan taraf görsel olarak da kazanır: aynı ağırlıkta iki sütun,
+ * karşılaştırma değil ikilem sunar.
+ */
+
+.c-contrast {
+  padding-block-start: var(--space-8);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-8);
+}
+
+.c-contrast__col {
+  border-block-start: var(--border-hairline) solid var(--border-subtle);
+  padding-block-start: var(--space-4);
+}
+
+.c-contrast__label {
+  font-family: var(--font-text);
+  font-size: var(--type-label);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--track-label);
+  padding-block-end: var(--space-4);
+}
+
+.c-contrast__col--muted .c-contrast__label { color: var(--text-muted); }
+.c-contrast__col--primary .c-contrast__label { color: var(--text-primary); }
+
+.c-contrast__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.c-contrast__list li {
+  font-size: var(--type-body-l);
+  line-height: var(--line-body-l);
+  margin-block-end: var(--space-4);
+}
+
+.c-contrast__list li:last-child {
+  margin-block-end: 0;
+}
+
+.c-contrast__col--muted .c-contrast__list li { color: var(--text-muted); }
+.c-contrast__col--primary .c-contrast__list li { color: var(--text-secondary); }
+
+@media (min-width: 64rem) { /* 1024px */
+  .c-contrast {
+    grid-template-columns: 5fr 4fr;
+    gap: var(--space-16);
+  }
+}

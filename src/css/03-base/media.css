@@ -1,0 +1,46 @@
+/**
+ * 03 · BASE — MEDIA
+ * ============================================================================
+ * Görseller: çerçeve yok, kenarlık yok, gölge yok, yuvarlatma yok.
+ * (PHASE 06 §20 — sunum kuralları)
+ *
+ * CLS ≤ 0.02 hedefi için: her <img> HTML'de açık width/height taşır,
+ * aşağıdaki kural da oranı korur. Çift güvence bilinçlidir — HTML'de
+ * unutulan bir boyut, CSS tarafından yakalanır.
+ */
+
+img,
+svg,
+video {
+  block-size: auto;
+  border-radius: var(--radius-none);
+}
+
+/* HTML'de width/height verilmişse oran otomatik korunur */
+img[width][height] {
+  block-size: auto;
+}
+
+figure {
+  margin: 0;
+}
+
+figcaption {
+  font-size: var(--type-body-s);
+  line-height: var(--line-body-s);
+  color: var(--text-muted);
+}
+
+/* En-boy oranları — SABİT SET. Bu üçü dışında oran kullanılmaz:
+   serbest oran sayfada görünmez bir düzensizlik üretir. */
+.u-ratio-16-10 { aspect-ratio: 16 / 10; }
+.u-ratio-4-5   { aspect-ratio: 4 / 5; }
+.u-ratio-3-2   { aspect-ratio: 3 / 2; }
+
+/* Yüklenmemiş görselin bıraktığı boşluk sayfa zeminiyle aynı kalsın —
+   beyaz bir dikdörtgen "hata" gibi okunur. */
+img {
+  background-color: var(--surface-page);
+  color: var(--text-muted);
+  font-size: var(--type-body-s);
+}
